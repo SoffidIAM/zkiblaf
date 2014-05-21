@@ -49,7 +49,7 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	Box llistaHolder;
 	Box formulariHolder;
 	public boolean saveContent;
-	String ample = "800px"; //$NON-NLS-1$
+	String ample = "98%"; //$NON-NLS-1$
 	Toolbar opt_toolbar; // Option toolbar
 	Toolbarbutton clear_criteria; // Clear search parameters
 	ImageClic img_clear;

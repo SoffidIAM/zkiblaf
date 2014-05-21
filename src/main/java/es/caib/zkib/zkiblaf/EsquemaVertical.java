@@ -112,12 +112,14 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 		criterisHolder = new Vbox();
 		criterisTotal.appendChild(criterisHolder);
 		criterisHolder.setVisible(getCriterisVisible());
+		criterisHolder.setWidth("100%");
 
 		// Part d'enmig; llista
 		hbox = new Hbox();
 		hbox.setWidth("100%"); //$NON-NLS-1$
 		super.insertBefore(hbox, null);
 		llistaHolder = new Vbox();
+		llistaHolder.setWidth("100%");
 		hbox.appendChild(llistaHolder);
 		titol = new Label();
 		titol.setValue(Messages.getString("EsquemaVertical.Browser")); //$NON-NLS-1$
@@ -129,6 +131,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 		hbox.setWidth("100%"); //$NON-NLS-1$
 		super.insertBefore(hbox, null);
 		formulariHolder = new Vbox();
+		formulariHolder.setWidth("100%");
 		hbox.appendChild(formulariHolder);
 		Hbox headerBox = new Hbox();
 		headerBox.setWidth("100%"); //$NON-NLS-1$
