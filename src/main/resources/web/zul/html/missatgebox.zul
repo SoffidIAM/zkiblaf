@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title="MissatgeBox" language="xul/html"?>
+
+
+<window title="${arg.title}" border="normal" closable="true"
+use="es.caib.zkib.zkiblaf.MissatgeboxDlg" position="center,center" sizable="true">
+	<attribute name="width" if="${arg.width ==null}">500px</attribute>
+	<attribute name="width" if="${arg.width !=null}">${arg.width}</attribute>
+	<style>
+		.messagebox {font-family: Arial;padding:0 5px;}
+		.messagebox td {vertical-align:middle}
+	</style>
+	<hbox sclass="messagebox" width="100%" widths="32px,*">
+		<image src="${arg.icon}" style="margin-right:10px;float:left;"/>
+		<label sclass="missatge" multiline="true" value="${arg.message}" hyphen='true'/>
+
+	</hbox>
+	<separator bar="true" style="margin:5px 6px;" unless="${arg.SENSE_BUTONS}"/>
+	<hbox style="margin-left:auto; margin-right:auto">
+	<button id="btn1" identity="${arg.OK}" sclass="messagebox-btn" use="es.caib.zkib.zkiblaf.MissatgeboxDlg$Button"
+		if="${!empty arg.OK}"/>
+	<button identity="${arg.CANCEL}" sclass="messagebox-btn" use="es.caib.zkib.zkiblaf.MissatgeboxDlg$Button"
+		if="${!empty arg.CANCEL}"/>
+	<button identity="${arg.YES}" sclass="messagebox-btn" use="es.caib.zkib.zkiblaf.MissatgeboxDlg$Button"
+		if="${!empty arg.YES}"/>
+	<button identity="${arg.NO}" sclass="messagebox-btn" use="es.caib.zkib.zkiblaf.MissatgeboxDlg$Button"
+		if="${!empty arg.NO}"/>
+	<button identity="${arg.RETRY}" sclass="messagebox-btn" use="es.caib.zkib.zkiblaf.MissatgeboxDlg$Button"
+		if="${!empty arg.RETRY}"/>
+	<button identity="${arg.ABORT}" sclass="messagebox-btn" use="es.caib.zkib.zkiblaf.MissatgeboxDlg$Button"
+		if="${!empty arg.ABORT}"/>
+	<button identity="${arg.IGNORE}" sclass="messagebox-btn" use="es.caib.zkib.zkiblaf.MissatgeboxDlg$Button"
+		if="${!empty arg.IGNORE}"/>
+	</hbox>
+</window>

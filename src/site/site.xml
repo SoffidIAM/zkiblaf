@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ZKIB Look and Feel">
+
+	<publishDate position="left" format="dd-MM-yy"/>
+
+	<body>
+	<menu name="General">
+		<item name="Introducci&#243;" href="index.html"/>
+		<item name="How to use" href="how-to.html">
+			<item name="Descriptor XML" href="descriptor-xml.html"/>
+			<item name="Fitxer ZUL" href="fitxer-zul.html"/>
+		</item>
+	</menu>
+    
+	${reports}
+
+	</body>
+</project>

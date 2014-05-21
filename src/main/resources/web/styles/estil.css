@@ -1,0 +1,595 @@
+/* Títol */
+.title td, .title .caption td {
+	font-family: Arial; font-size: 11pt; font-weight: bold;
+	padding-top: 2px; padding-bottom: 3px; margin-bottom: 10px;
+	background: #0e5462; color: white; border: none;
+}
+
+/* Opcions del manteniment: Afegir nou, Eliminar sel·leccionat i Confirmar canvis */
+.title .caption a, .title .caption a:visited{
+	font-family: Arial;	font-size: 11px; font-weight: bold; color: white;
+}
+
+.title .caption a:hover {
+	text-decoration: underline;
+}
+
+/* Títol azul de les capses */
+.titol_capsa {
+	font-family: Arial;	font-size: 11px; font-weight: bold; color: #0e5462;
+}
+
+/* Títol taronja de tancar la sessió i tornar el menu */
+.titol_tanca {
+	font-family: Arial; 
+	font-size: 11px; 
+	font-weight: bold; 
+	color: #FFF;
+	cursor: pointer;
+}
+/* Lo "destacamos" cuando el ratón se pone encima */
+.titol_tanca:hover {
+
+	text-decoration: underline;
+}
+
+/* Borde dels windows de tipus Llista */
+div.wc-modal, div.wc-modal-none, div.wc-highlighted, div.wc-highlighted-none {
+	border: 2px solid #0e5462; background: #FFF;
+}
+
+/* Linia superior de l'aplicació */
+.topline {
+	background-color: #0e5462;
+	margin: 0 0 4px 0;
+	border-bottom:0.3em solid #70a3cc;
+	padding: 2px 3px;
+	height: 30px;
+	/*width: 100%;*/
+}
+
+* {margin:0;padding:0;}
+html, body {height: 100%; width: 100%;padding: 0px !important;}
+.col_der, .col_izq, .col_cen {height: 100%;}
+.col_der {
+	float: right; 
+	text-align:right;
+	vertical-align:middle;
+	padding-right:5px;
+}
+.col_izq {
+	float: left;
+	vertical-align:middle;
+}
+.col_cen {
+	text-align:center;
+	vertical-align:middle;
+	margin: 5px auto;
+	white-space: nowrap;
+	max-width: 50%;
+	overflow: hidden;
+}
+/* Titol principal */
+
+.maintitle {
+	font-family: Arial;	
+	font-size: 18px; 
+	font-weight: bold; 
+	color: #FFF;
+}
+
+.startmenu {
+	border: 2px solid #70a3cc;
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	border-radius: 5px;
+	-khtml-border-radius: 3px; 
+	padding: 0 5px 5px 5px;
+	margin-left:5px;
+	vertical-align: middle;
+	cursor: pointer;
+	background-color: #0e5462;
+	white-space: nowrap;
+	text-align:center;
+	z-index: 32768;
+	float:left; /* per a alinear favorits */
+}
+
+.favorits {
+	float:left;	
+	margin-left: 2px;
+	margin-top: 1px;
+	position: relative;
+	top: -1px;
+	padding-left: 1px;
+	margin-right: 3px;
+}
+
+.favorits:hover {
+	background-color: #70a3cc;
+	border: 2px solid #0e5462;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin-right: 0px;
+}	
+
+.startmenu:hover {
+	background-color:#70a3cc;
+}
+
+.inici {
+	font-family:Arial,Helvetica,sans-serif;
+	font-size: 11pt;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.benvingutmsg span {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;	
+}
+
+.benvingut {
+	color: #ffffff;	
+}
+
+.codiusuari {
+	font-weight: bold;
+	color: #70a3cc;	
+	cursor: pointer;
+}
+.codiusuari:hover{
+	text-decoration: underline;
+}
+/* menú de inicio */
+.menuprincipal {
+	top: 35px !important;
+	left: 0px !important;
+	position:absolute;	
+	border: 1px solid #70a3cc;
+}
+
+.menufavorits {
+	top: 29px !important;
+	left: 80px !important;
+	position:absolute;	
+	border: 1px solid #BE6200;
+}
+
+.menuprincipal tr.title td,.menufavorits tr.title td  {
+	text-indent: 5px;	
+	background-color: #70a3cc;	
+}
+
+.reloadtasks {
+	cursor: pointer;	
+}
+
+/* Capsa dels criteris de cerca */
+.capsa_cerca {
+	border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;
+	border-top-style: solid; border-right-style: solid; border-bottom-style: solid;	border-left-style: solid;
+	border-top-color: #0e5462; border-right-color: #0e5462; border-bottom-color: #0e5462; border-left-color: #0e5462;
+	width: 800px; height: 77px; padding-top:5px; padding-bottom:5px; overflow: hidden;
+	margin-bottom: 7px;
+}
+
+/* Capsa del navegador */
+.capsa_navegador {
+	border-top-width: 6px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;
+	border-top-style: solid; border-right-style: solid; border-bottom-style: solid;	border-left-style: solid;
+	border-top-color: #0e5462; border-right-color: #0e5462; border-bottom-color: #0e5462; border-left-color: #0e5462;
+	/*width: 800px;*/ padding-top:0px; padding-bottom:0px; overflow: hidden;
+	margin-bottom: 7px;
+}
+
+/* Capsa dels Detalls */
+.capsa_detalls {
+	border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;
+	border-top-style: solid; border-right-style: solid; border-bottom-style: solid;	border-left-style: solid;
+	border-top-color: #0e5462; border-right-color: #0e5462; border-bottom-color: #0e5462; border-left-color: #0e5462;
+	/*width: 500px;*/ padding-top:0px; padding-bottom:0px; overflow: auto;
+	margin-bottom: 7px;
+}
+
+/* Entrada de dades: textbox */
+.text, .textbox {
+	font-family: Arial;	font-size: 12px;
+	border: 1px solid #7F9196; /*width: 135px;*/
+	background-image: none;
+}
+
+input [type="checkbox"] {
+	width: 30px;
+}
+
+/* Entrada de dades: interior dels textbox */
+textarea {
+	font-family: Arial;	font-size: 11px; font-weight: bold;
+}
+
+/* Etiquetes: label */
+span label {
+	font-family: Arial;	font-size: 11px; font-weight: normal; margin-left:3px; color: black;
+}
+
+span {
+	font-family: Arial;	font-size: 11px; font-weight: normal; color: black;
+}
+
+.etiqueta {
+	font-family: Arial;	font-size: 11px; font-weight: bold; margin-left:3px; color: black; vertical-align: middle;	
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.menuinicial {
+	font-family: Arial;	font-size: 11px; font-weight: bold; margin-left:3px; color: white;	
+}
+
+.menuinicial:hover {
+	font-family: Arial;	font-size: 11px; font-weight: bold; margin-left:3px; color: white;
+	text-decoration: underline; cursor: pointer;
+}
+
+.menuinicialnoclicable {
+	font-family: Arial;	font-size: 11px; font-weight: bold; margin-left:3px; color: #5E5A80;	
+}
+
+.seleccionable {
+	font-family: Arial;	font-size: 11px; font-weight: normal; margin-left:3px; color: black;	
+}
+
+.seleccionable:hover {
+	font-family: Arial;	font-size: 11px; font-weight: bold; margin-left:3px; color: black;
+	text-decoration: underline; cursor: pointer;
+}
+
+.seleccionable:visited{
+	font-family: Arial;	font-size: 11px; font-weight: bold; margin-left:3px; color: black;
+}
+
+/* Botons */
+button {
+ 	font-family: Arial;	font-size: 11px; color: black;
+ 	padding:5px 10px 6px 7px;
+}
+
+/* Barra de botons */
+.toolbar {
+	padding: 2px; border: 1px; border-top:0.1px solid white; background: #0e5462; 
+}
+
+.toolbar a, .toolbar a:visited, .toolbar a:hover {
+	font-family: Arial;	font-size: 11px; font-weight: bold; color: #FFF;
+	border: 0px; text-decoration: none; background: #0e5462;
+	white-space:nowrap; 
+}
+
+.toolbar img
+{
+	margin-left: 5px;
+}
+
+.toolbar-checkbox
+{
+	margin-left: 5px;
+}
+
+.toolbar-checkbox label
+{
+	font-family: Arial;	font-size: 11px; font-weight: bold; color: #FFF;
+}
+
+/* Títols de les capceleres dels listbox, trees i grids */
+div.head-cell-inner {
+	font-family: Arial;	font-size: 11px; font-weight: bold; color: black; text-align: left;
+}
+	
+tr.odd {
+	background: white;
+}
+
+/* LISTBOX */
+div.listbox {
+	font-family: Arial;	font-size: 11px; color: black;
+	border: 1px solid #0e5462; margin: 0px;
+}
+
+/* Capçalera del listbox i del tree */
+div.listbox-head th, div.listbox-paging th, div.tree-head th, div.tree-paging th {
+	font-family: Arial;	font-size: 21px; color: black;	
+	background: threedface;
+	overflow: hidden;
+	border-top: 1px solid threedhighlight;
+	border-bottom: 1px solid threedshadow;
+	border-left: none !important;
+	border-right: none !important;
+	background-image:url('../img/bizqder.gif');
+	background-repeat:repeat-y;
+	background-position: top right
+}
+
+div.listbox-head th:last-child, 
+div.listbox-paging th:last-child, 
+div.tree-head th:last-child, 
+div.tree-paging th:last-child {
+	background-image:url('../img/bder.gif');
+	background-repeat:repeat-y;
+	background-position: top right
+}
+
+div.listbox-head th div, 
+div.listbox-head th.sort div, 
+div.listbox-paging th div,
+div.tree-head th div,
+div.tree-paging th div,
+div.grid-head th div {
+	padding-left: 1px;
+}
+
+/* Font del contingut del listbox i del tree (capçalera i files) */
+div.head-cell-inner, div.cell-inner {
+	font-family: Arial;	font-size: 11px; color: black; text-align: left;
+}
+
+/* Fila del Listbox amb el cursor damunt (clar) */
+tr.overd  {
+   background: #F0F0F0;
+}
+
+/* Fila del Listbox sel·leccionada i amb el cursor damunt (oscur) */
+tr.seld {
+   background: #DBDBDB;
+   /*text-decoration: underline;*/
+}
+
+/*table.listbox-btable tr.seld  .cell-inner {
+	text-decoration: underline;
+}*/
+
+table.listbox-btable tr.seld td {
+	background-color: #D3D3D3;
+}	
+
+td.focusd {
+	background-image: none !important; /* evitem una icona que surt en les llistes*/	
+}
+
+
+/* GRID */ 
+div.grid, div.grid-body {
+	font-family: Arial;	font-size: 11px; color: black; margin: 0px;
+}
+
+div.grid-head th {
+	font-family: Arial;	font-size: 11px; color: black;	
+	/*border: 1px 0px solid #606E72;*/ 
+	background: threedface; 
+	overflow: hidden;
+	/*border-color: threedhighlight threedshadow threedshadow threedhighlight;*/
+	border-top: 1px solid threedhighlight;
+	border-bottom: 1px solid threedshadow;
+	border-left: none;
+	border-right: none;
+	background-image:url('../img/bizqder.gif');
+	background-repeat:repeat-y;
+	background-position: top right
+}
+
+div.grid-head th:last-child {
+	background-image:url('../img/bder.gif');
+	background-repeat:repeat-y;
+	background-position: top right
+}
+
+/* Files del grid */
+tr.grid td.gc { 
+	font-family: Arial;	font-size: 11px; color: black; background: #EEE; 
+	border-bottom: none; border-left: 1px solid #FFF; border-right: 1px solid #606E72; border-top: 1px solid #DDD; 
+	padding: 2px;
+}
+
+/* Hacemos que la tabla marque las filas pares-impares de distinto color */
+/*table.grid-btable tr.odd td {
+	background-color: #FAEBD7 !important;
+}*/
+
+/* Bara inicial de seycon-web */
+td.lwt-embedded, td.mwt-embedded, td.rwt-embedded { 
+	background:#BE6200 none repeat scroll 0 0;
+	color:white;
+	font-family:Arial;
+	font-size:11pt;
+	font-weight:bold;
+	padding: 0;
+	border: 0 0 1px 0 solid #8AA3C1;
+}
+
+/* Hacemos que el listbox parezca a los estilos del grid */
+.likeagrid table td {
+	background-color:#EEEEEE;
+	padding:4px 5px;
+	border:1px solid white;
+	border-style:solid solid none none;
+	border-color: #DDDDDD #606E72 #000000 #FFFFFF;
+	cursor: default;
+}
+
+.likeagrid table td div table td {
+	border: none;
+}
+
+.likeagrid {
+	border:1px solid #7F9DB9;
+}
+
+/* centra tots els headers dels listbox o grids */
+.headcentrat  th div {
+	text-align: center;
+}
+
+.label_link {
+	font-family: Arial;	font-size: 11px; font-weight: bold;  color: #0e5462;
+	margin: 15px 5px 5px 0; cursor: pointer; display: inline; 
+}
+.label_link:hover {
+	text-decoration:underline; 
+}
+
+/* arreglem problemes que apareixen a IE7, IE8 als listbox de SEU*/
+.listbox-body {
+	min-height: 30px; /*abans 70px */
+	/*max-height: 282px !important;*/
+	height: auto;
+}
+.sort {
+	width: auto;
+}
+
+/* fem que els bordes siguen com a la intranet de la CAIB 
+div.tree {
+	border: 1px solid #70a3cc!important;
+}
+*/
+capsa_navegador div.tree {
+	border: 1px 0 0 0 solid #0e5462 !important;
+}
+
+div.tabpanel {
+	border-top: 0px;
+	border-bottom: 1px solid #0e5462;
+	border-right: 1px solid #0e5462;
+	border-left: 1px solid #0e5462;
+}
+
+div.wc-capsa_detalls-none {
+	padding:5px 0 0 2px;
+}
+
+/* fons per defecte del components a blan */
+div.listbox, div.tree, div.grid {
+	background-color: #FFFFFF;
+}
+
+select.listbox {
+	font-size: 12px;
+}
+
+/* Workflows: nou SEU */
+.workarea {
+	padding: 20px;
+}
+
+.wf_listbox {
+	border: 2px solid #0e5462;
+	min-width: 740px;
+}
+
+/* perque el contingut de la 1a columna del listbox aparega centrat */
+.centra_primera_col .listbox-body table.listbox-btable tbody tr.item td:first-child div {
+	 text-align:center
+}
+
+
+/* imageclic: enlloc de imagemap */
+img.imageclic {
+	cursor: pointer;	
+}
+
+img.imageclic .centre{
+	display: block;
+	margin: 0 auto;
+}
+
+/* fem que els imageclic pareguen com a un boto amb efectes el seu estil ha de ésser imageclic boton */
+img.boton:hover {border: 1px solid #FFF; border-radius:5px;}
+img.boton:active {border: 1px solid #FFF; border-radius:5px; opacity: 0.9}
+img.boton {border: 1px solid white;}
+
+
+/* arreglem problema que surt a IE7 que mostra un scrolling vertical en els grids */
+.grid .sensescroll div  {
+	overflow:none !important;border: 1px solid transparent;
+}
+
+/* vbox i hbox centrats verticalment */
+table.vcentre td {vertical-align: middle;}
+.vcentre-sp {margin: 0; padding:0; width: 0.3em;}		
+
+
+.dateboxread input, .dateboxreadnoborder input 
+	{background-color:transparent; color: black !important;font-family: Arial; font-size: 12px;border: 1px solid #7F9DB9;}
+.dateboxreadnoborder input {border:none;}
+img.imageclic.centre{
+	display: block;
+	margin: 0 auto;
+}
+
+td.dataTreeCelldestacada div {text-decoration: line-through; color:gray;}
+
+/* Estil per als combobox */
+.combobox, .comboboxinp {font-family: Arial; font-size: 12px; color: black;}
+
+
+/* Estil per als menubar */
+
+div.menubar{
+	color: #FFF;
+	padding: 1px 1px 1px 0px; border: 0px; 
+	border-top:0.1px solid white; 
+	background-color: #0e5462;
+}
+
+div.menupopup {
+	background-color: #FFF;
+} 
+
+div.menubar td {
+	padding: 0px;
+	border: none;
+}
+
+td.menu1ck {
+	padding-right: 6px;
+	background-image: url('../img/checked.gif');
+	background-repeat: no-repeat;
+}	
+
+
+td.menu1 {
+	background-image: url('../img/unchecked.gif');
+	background-repeat: no-repeat;
+	padding-right: 6px;
+}
+
+div.menubar a {
+	font-family: Arial;	
+	font-size: 11px;
+	color: #FFF;
+} 
+
+div.menupopup a  {
+	font-family: Arial;	font-size: 11px;
+}
+
+.activafiltre {
+	font-family: Arial;	font-size: 11px; text-decoration: none;	
+}
+
+.activafiltre:hover {
+	text-decoration: underline;
+}
+
+.checkbox_border {
+	display: inline;
+	padding: 2px 3px 0 3px;
+	margin-right: 5px;
+}
+
+.checkbox_border input {
+	margin-top: 2px;
+}

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<language-addon>
+
+	<addon-name>ZKIB-LAF</addon-name>
+	 <version>
+	  	<version-class>es.caib.zkib.zkiblaf.Version</version-class>
+	  	<version-uid>1.0</version-uid>
+	  </version>
+
+	<language-name>xul/html</language-name>
+
+
+	<component>
+		<extends>button</extends>
+		<component-name>accept</component-name>
+		<component-class>es.caib.zkib.zkiblaf.AcceptButton</component-class>
+	</component>
+
+	<component>
+		<extends>button</extends>
+		<component-name>cancel</component-name>
+		<component-class>es.caib.zkib.zkiblaf.CancelButton</component-class>
+	</component>
+
+	<component>
+		<extends>window</extends>
+		<component-name>esquema</component-name>
+		<component-class>es.caib.zkib.zkiblaf.Esquema</component-class>
+	</component>	
+
+	<component>
+		<extends>window</extends>
+		<component-name>criteris</component-name>
+		<property>
+			<property-name>class</property-name>
+			<property-value>capsa_cerca</property-value>
+		</property>
+	</component>
+
+	<component>
+		<extends>vbox</extends>
+		<component-name>altres_criteris</component-name>
+	</component>
+
+	<component>
+		<extends>window</extends>
+		<component-name>navegador</component-name>
+		<property>
+			<property-name>class</property-name>
+			<property-value>capsa_navegador</property-value>
+		</property>
+	</component>
+	
+	<component>
+		<extends>window</extends>
+		<component-name>detalls</component-name>
+		<property>
+			<property-name>class</property-name>
+			<property-value>capsa_detalls</property-value>
+		</property>
+	</component>
+
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>insertbutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.InsertButton</component-class>
+	</component>
+
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>undobutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.UndoButton</component-class>
+	</component>
+	
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>deletebutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.DeleteButton</component-class>
+	</component>
+
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>commitbutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.CommitButton</component-class>
+	</component>
+	
+	<component>
+		<extends>button</extends>
+		<component-name>commitbutton2</component-name>
+		<component-class>es.caib.zkib.zkiblaf.CommitButton2</component-class>
+	</component>
+	
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>listexporttoolbarbutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.ListboxExportToolbarButton</component-class>
+	</component>
+	
+	<component>
+		<extends>button</extends>
+		<component-name>listexportbutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.ListboxExportButton</component-class>
+	</component>
+	
+	<component>
+		<extends>button</extends>
+		<component-name>gridexportbutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.GridExportButton</component-class>
+	</component>			
+	
+	<component>
+		<extends>window</extends>
+		<component-name>esquemavertical</component-name>
+		<component-class>es.caib.zkib.zkiblaf.EsquemaVertical</component-class>
+	</component>	
+	
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>inserttreebutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.InsertTreeButton</component-class>
+	</component>
+
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>deletetreebutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.DeleteTreeButton</component-class>
+	</component>
+	
+	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>undotreebutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.UndoTreeButton</component-class>
+	</component>
+
+	<component>
+		<extends>button</extends>
+		<component-name>undotreebutton2</component-name>
+		<component-class>es.caib.zkib.zkiblaf.UndoTreeButton2</component-class>
+	</component>
+
+	<component>
+		<component-name>signapplet</component-name>
+		<component-class>es.caib.zkib.zkiblaf.SignApplet</component-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>~./zul/html/sign.dsp</mold-uri>
+		</mold>
+	</component>
+	
+	<component>
+		<extends>vbox</extends>
+		<component-name>application</component-name>
+		<component-class>es.caib.zkib.zkiblaf.ApplicationComponent</component-class>
+	</component>
+
+	<component>
+		<extends>vbox</extends>
+		<component-name>frame</component-name>
+		<component-class>es.caib.zkib.zkiblaf.Frame</component-class>
+	</component>
+
+	<component>
+		<component-name>stamp</component-name>
+		<component-class>es.caib.zkib.zkiblaf.Stamp</component-class>
+		<mold>
+			<mold-name>default</mold-name>
+			<mold-uri>~./zul/html/stamp.dsp</mold-uri>
+		</mold>
+	</component>
+
+	<component>
+		<extends>image</extends>
+		<component-name>imageclic</component-name>
+		<component-class>es.caib.zkib.zkiblaf.ImageClic</component-class>
+	</component>
+	
+	<zscript>
+		 import es.caib.zkib.zkiblaf.*;
+	 </zscript>	
+	
+	<component>
+		<extends>window</extends>
+		<component-name>Missatgebox</component-name>
+		<component-class>es.caib.zkib.zkiblaf.Missatgebox</component-class>
+	</component>
+</language-addon>

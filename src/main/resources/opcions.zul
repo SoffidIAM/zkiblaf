@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+
+	<window title="${arg.title}" width="800px">
+		<caption>
+			<toolbarbutton
+				id="addbutton"
+				label="Afegeix nou"
+				image="/img/insert16.gif"
+				onClick="setInsertMode()" />
+			<space spacing="5px"/>
+			<toolbarbutton
+				id="deletebutton"
+				label="Elimina sel·leccionat"
+				image="/img/cancel16.gif"
+				onClick="delete()" />
+			<space spacing="5px"/>
+			<toolbarbutton
+				id="savebutton"
+				label="Confirma canvis"
+				onClick="commit();"
+				image="/img/save16.gif"
+				visible="true" />
+			<space spacing="5px"/>
+			<toolbarbutton
+				id="savebutton2"
+				label="Confirma canvis"
+				onClick="commit();"
+				image="/img/save16.gif"
+				visible="false" />
+		</caption>
+	</window>
+	<separator spacing="5px"/>
+	
+</zk>

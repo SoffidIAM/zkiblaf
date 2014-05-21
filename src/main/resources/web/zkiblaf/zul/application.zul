@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><?taglib uri="/WEB-INF/tld/web/core.dsp.tld" prefix="c" ?>
+<?page id="index"?>
+<window xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss.org/2005/zk" height="100%"
+ width="100%" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<zscript>
+	String usuari = Executions.getCurrent().getUserPrincipal().getName();
+	String nom = Executions.getCurrent().getUserPrincipal().getFullName();
+	//boolean mostraFavorits = es.caib.zkib.zkiblaf.Application.isFavoritesVisible();
+	void openMenu(){
+		if(!otherlogoutButton.getStyle().contains("display:none")){
+			otherlogoutButton.setStyle("display:none");
+		}
+		else{
+			otherlogoutButton.setStyle("display:block");
+		}
+	}
+	
+	</zscript>
+	<div sclass="topline">
+		<div align="right" sclass="col_der">
+			<div sclass="benvingutmsg">
+				<label sclass="benvingut" value="${c:l('zkiblaf.lblUsuario')}: "/>
+		    	<label if="${arg.showProfile}" onClick='es.caib.zkib.zkiblaf.Application.setPage("perfil/perfil.zul")' sclass="codiusuari" value="${nom} (${usuari})"/>
+				<label if="${!arg.showProfile}" sclass="codiusuari" onClick="openMenu();" value="${usuari}"/>	
+			</div>
+			<div>
+				<label if="${arg.showProfile}" id="logoutButton" sclass="titol_tanca" value="${c:l('zkiblaf.tancarSessio')}"/>
+				<label if="${!arg.showProfile}" id="otherlogoutButton" sclass="menuperfil menu-display shadow-window" style="display:none;" value="${c:l('zkiblaf.tancarSessio')}" width="15em"/>
+			</div>
+		</div>
+
+
+		<div sclass="col_izq">
+			<div height="19px" id="menuButton" sclass="startmenu" width="65px">
+				<label sclass="inici" value="${c:l('zkiblaf.Inici')} " />
+				<image if="${arg.showProfile}" src="~./img/baixa.png"/>
+				<image if="${!arg.showProfile}" src="icons/downself.png"/>
+			</div>
+			<!--div id="favoritsButton" sclass="favorits" width="25px" height="24px" if="${mostraFavorits}">
+				<image src="~./img/star_ombra.png" />
+			</div-->
+		</div>
+
+		<div sclass="col_cen">
+			<label class="maintitle" id="title" value="${c:l('application.zul.BPM')}"/>
+		</div>
+	</div>
+	<div sclass="workarea">
+	<vbox id="workArea" width="98%">
+		<include/>
+		<include/>
+		<include/>
+		<include/>
+		<include/>
+		<include/>
+		<include/>
+		<include/>
+		<include/>
+	</vbox>
+	</div>
+</window>

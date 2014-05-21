@@ -1,0 +1,260 @@
+<document>
+	<properties>
+		<title>Fitxer d'interficíe d'usuari</title>
+	</properties>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+	<body>
+		<section name="Fitxer d'interficíe d'usuari">
+		
+			<p>Una vegada definit el model de dades, s'haurà de crear un fitxer amb extensió .zul per l'interfície d'usuari.</p>
+
+			<p>El fitxer .ZUL que conté l'interfície d'usuari, és un fitxer XML amb l'estructura inicial:</p>
+			<source>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?page id="printers" title="Gestió d'impressores"?&gt;
+&lt;?component name="input_criteri" macro-uri="input_criteri.zul"?&gt;
+&lt;zk xmlns:h="http://www.w3.org/1999/xhtml"&gt;
+	&lt;style src="estil.css"/&gt;
+	&lt;datamodel id="model" src="descriptor.xml" rootNode="nomNodePare"/&gt;
+	&lt;zscript&gt;
+	&lt;!-- Personalitzacions amb codi Beanshell --&gt;
+	&lt;/zscript&gt;
+	&lt;esquema&gt;
+		&lt;criteris&gt;&lt;/criteris&gt;
+		&lt;navegador&gt;&lt;/navegador&gt;
+		&lt;detalls&gt;&lt;/detalls&gt;
+	&lt;/esquema&gt;
+&lt;/zk&gt;	
+			</source>
+			<p>Els tags <i>&lt;?xml&gt;</i> i <i>&lt;zk&gt;</i> són obligatoris tal i com estan definits al exemple.</p> 
+			<p>El tag <i>&lt;?page&gt;</i> és opcional, i si s'afegeix serveix per a personalitzar el títol de la pàgina web generada.</p>
+			<p>El tag <i>&lt;?component&gt;</i> és obligatori i indica que hi ha un component personalitzat anomenat <i>input_criteri</i>.</p>
+			<p>El tag <i>&lt;style&gt;</i> és opcional, i s'afegeix per a carregar una fulla d'estil.</p>
+			<p>I el més important al fitxer .zul és el component <i>&lt;datamodel&gt;</i> que se configura segons les dades del model de dades al descriptor xml:</p>
+			<source>
+id = node principal que s'emprarà al dataPath, que tindrà el format /model:/<i>nomNodeFill</i>
+src = ubicació del fitxer XML on està definit el model de dades
+rootNode = el primer datanode de descriptor.xml, és a dir, <i>nomNodePare</i>
+			</source>
+			<p>A continuació, s'explicarà cadascuna de les seccions que contindrà el fitxer .zul:</p>
+			<p>&#8226; Pantalla completa (esquema)</p>
+			<source>
+&lt;esquema title="Gestió d'impressores" id="esquema" onHideFormulari="showLista()"&gt;
+			</source>
+			<p>Aquest tag anomenat <i>esquema</i>, marca el contingut de l'interfície de manteniment, implementat a una classe (Esquema.java).</p>
+				
+			<p>&#8226; Criteris de cerca (criteris)</p>
+			<source>
+&lt;criteris id="queryWindow" onOK="search()"&gt;
+&lt;/criteris&gt;
+			</source>
+			<p>Aquest tag anomenat <i>criteris</i>, marca el contingut dels criteris de cerca. Els criteris de cerca, s'hauran de personalitzar segons les necessitats de l'aplicació.</p>
+			<source>
+&lt;criteris id="queryWindow" onOK="search()"&gt;
+	&lt;!-- Primer criteri --&gt;
+	&lt;hbox&gt;
+		&lt;input_criteri id="query1" etiqueta="Codi:"/&gt;
+		&lt;vbox&gt;&lt;imagemap src="~./img/fletxa_cerca.gif" onClick="search()"/&gt;&lt;/vbox&gt;
+	&lt;/hbox&gt;
+	&lt;!-- Segon criteri --&gt;
+	&lt;input_criteri id="query2" etiqueta="Model:"/&gt;
+	&lt;!-- Altres criteris --&gt;
+	&lt;hbox&gt;
+		&lt;label value="Altres" width="100px"/&gt;
+		&lt;vbox&gt;&lt;imagemap id="img_altres" src="~./img/fletxa.gif" onClick="showAltres()"/&gt;&lt;/vbox&gt;
+	&lt;/hbox&gt;
+	&lt;separator spacing="2px"/&gt;
+	&lt;altres_criteris id="queryWindowAltres" visible="false"&gt;
+		&lt;input_criteri id="query3" etiqueta="Serv. Impressió:"/&gt;
+		&lt;input_criteri id="query4" etiqueta="Compartida:"/&gt;	
+	&lt;/altres_criteris&gt;
+&lt;/criteris&gt;
+			</source>
+			<p>A aquest exemple, a part de components definits al ZK com <i>&lt;hbox&gt;</i>, <i>&lt;vbox&gt;</i> i <i>&lt;imagemap&gt;</i> també hi ha d'altres que són personalitzats, com <i>&lt;input_criteri&gt; i &lt;altres_criteris&gt;</i>.</p>
+			<p>Al component <i>&lt;criteris&gt;</i>, el desenvolupador només haurà de personalitzar les etiquetes (amb l'atribut <i>etiqueta</i>) que identifiquen els criteris de cerca.</p>
+				
+			<p>&#8226; Navegador (navegador)</p>
+			<source>
+&lt;navegador id="lista" style="overflow: hidden"&gt;
+			</source>
+			<p>Aquest tag anomenat <i>navegador</i>, marca el contingut del navegador on se mostraran els registres obtinguts de la cerca.</p>
+			<source>
+&lt;navegador id="lista" style="overflow: hidden"&gt;
+	&lt;toolbar&gt;
+		&lt;insertbutton listbox="/esquema/lista/listbox" onClick="showDetall()"/&gt;
+		&lt;deletebutton listbox="/esquema/lista/listbox"/&gt;
+		&lt;commitbutton datamodel="/model"/&gt;
+	&lt;/toolbar&gt;
+	&lt;listbox id="listbox"
+		dataPath="/model:/printer"
+		rows="20"
+		onSelect="select()"
+		onClick="showDetall()"
+		autocommit="false"&gt;
+		&lt;listhead&gt;
+			&lt;listheader label="Codi" sort="auto"/&gt;
+			&lt;listheader label="Model" sort="auto"/&gt;
+		&lt;/listhead&gt;
+		&lt;dataitem bind="."&gt;
+			&lt;listcell bind="@codi"/&gt;
+			&lt;listcell bind="@model"/&gt;
+		&lt;/dataitem&gt;
+	&lt;/listbox&gt;
+&lt;/navegador&gt;
+			</source>
+			<p>A aquest exemple, s'han emprat els components de ZK anomenats <i>&lt;listbox&gt;</i> i <i>&lt;toolbar&gt;</i>.</p>
+			<p>El component <i>&lt;toolbar&gt;</i> conté tres botons implementats amb classes java: <i>&lt;insertbutton&gt;</i>, <i>&lt;deletebutton&gt;</i>, <i>&lt;commitbutton&gt;</i>.</p>
+			<p>Per associar un component a un element del model de dades (<i>/model:/printer/@codi</i>), s'utilitza l'atribut <i>bind</i>. Podem veure que <i>model</i> és l'origen de dades especificat a l'atribut <i>id</i> del component <i>&lt;datamodel&gt;</i>. L'element del model de dades s'especifica mitjançant la ruta Xpath associada, així a aquest cas és <i>/model:/printer/@codi</i>.</p>
+			<p>Però a aquest exemple, hem identificat la ruta a l'atribut dataPath del component <i>&lt;listbox&gt;</i>, i després, hem identificat els camps de la base de dades a l'interfície d'usuari amb l'atribut <i>bind</i> i cadascun dels camps, precedits per @.</p>
+			<source>
+&lt;dataitem bind="."&gt;
+	&lt;listcell bind="@codi"/&gt;
+	&lt;listcell bind="@model"/&gt;
+&lt;/dataitem&gt;
+			</source>
+			<p>Al component <i>&lt;navegador&gt;</i>, el desenvolupador haurà de personalitzar:</p>
+			<p>- la informació relativa a l'origen de dades i la ruta: <i>dataPath="/model:/printer"</i></p>
+			<p>- els camps a mostrar al navegador: <i>&lt;listcell bind="@codi"/&gt;</i></p>
+				
+			<p>&#8226; Formulari de detalls (detalls)</p>
+			<source>
+&lt;detalls id="dades" width="500px"&gt;
+			</source>
+			<p>Aquest tag anomenat <i>detalls</i>, marca el contingut del formulari on se podrà actualitzar la informació completa del registre sel·leccionat.</p>
+			<source>
+&lt;form id="form"	dataPath="/esquema/lista/listbox:/."&gt;
+	&lt;grid width="495px"&gt;
+		&lt;rows&gt;
+			&lt;row&gt;
+				&lt;label value="Codi"/&gt;
+				&lt;textbox id="detall_codi" bind="@codi"/&gt;
+			&lt;/row&gt;
+			&lt;row&gt;
+				&lt;label value="Model"/&gt;
+				&lt;textbox id="detall_model" bind="@model"/&gt;
+			&lt;/row&gt;
+			&lt;row&gt;
+				&lt;label value="Serv. Impressió"/&gt;
+				&lt;textbox id="detall_impressio" bind="@maquina"/&gt;
+			&lt;/row&gt;
+			&lt;row&gt;
+				&lt;label value="Compartida"/&gt;
+				&lt;radiogroup id="compartida" bind="@local"&gt;
+					&lt;radio label="Sí" value="S"/&gt;
+					&lt;radio label="No" value="N"/&gt;
+				&lt;/radiogroup&gt;	
+			&lt;/row&gt;
+		&lt;/rows&gt;
+	&lt;/grid&gt;
+&lt;/form&gt;
+			</source>
+			<p>En aquest exemple, també s'han emprat components propis de ZK.</p>
+			<p>L'atribut <i>dataPath="esquema/lista/listbox:/."</i>, indica que el formulari està associat al component <i>listbox</i>, que a la seva vegada pertany al component <i>navegador</i> que té com identificador <i>lista</i> i que tots dos pertanyen a <i>esquema</i>. Així aconsseguim que se mostri només el registre sel·leccionat al navegador.</p>
+			<p>I també se pot observar que s'identifiquen els camps de la base de dades a l'interfície d'usuari amb l'atribut <i>bind</i> i cadascun dels camps, precedits per @.</p>
+			<p>Al component <i>&lt;detalls&gt;</i>, el desenvolupador haurà de personalitzar cadascuna de les <i>&lt;row&gt;</i>, per tal de configurar els camps de la base de dades que s'hauran de mantenir, indicant sempre:</p>
+			<p>- un component <i>&lt;label&gt;</i>, per tal d'etiquetar el camp amb l'atribut <i>value</i>.</p>
+			<p>- un component (a sel·lecció de l'usuari, segons el tipus de camp), per tal de mantenir el camp, amb l'atribut <i>bind</i>.</p>
+				
+			<p>Per últim, cal comentar que l'associació entre un component i un element del model de dades, depen del tipus de component. Si se tracta d'un <i>&lt;label&gt;</i>, l'associació és unidireccional, és a dir, que només se visualitzarà la informació de l'element del model de dades sense actualitzar-se. Però en el cas de components com <i>&lt;textbox&gt;</i>, <i>&lt;checkbox&gt;</i>, i altres, l'associació és bidireccional, permetent els canvis al model de dades.</p>
+				
+			<p>Nota: Els components propis de ZK estan explicats detalladament al manual <a href="http://www.zkoss.org/doc/ZK-devguide.pdf">http://www.zkoss.org/doc/ZK-devguide.pdf</a> i exemples molt aclaratoris a <a href="http://www.zkoss.org/zkdemo/userguide/">http://www.zkoss.org/zkdemo/userguide/</a></p>
+			
+			<subsection name="Personalitzacions al Zscript">
+				<p>Els scripts que s'utilitzen associats a events de components del fitxer d'interfície d'usuari, els podem classificar en dos tipus:</p>	
+				
+				<p>&#8226; Scripts associats a la cerca</p>
+				<p><i>search</i></p>
+				<source>
+void search ()
+{
+	try {
+               
+		listbox = esquema.getFellow("lista").getFellow("listbox");		
+		
+		cod = esquema.getFellow("queryWindow").getFellow("query1").getFellow("textbox");
+		nom = esquema.getFellow("queryWindow").getFellow("query2").getFellow("textbox");   
+
+		model.getVariables().declareVariable("cod", cod.value);
+		model.getVariables().declareVariable("nom", nom.value);		
+				
+		model.getJXPathContext().getValue("/xarxa").refresh();
+		listbox.dataPath = "/model:/xarxa";
+                  
+		if ( (cod.value.equals ("")) @and (nom.value.equals ("")) )
+		{
+		  	listbox.dataPath = "/model:/printer";
+		} else {
+	    	if (!(cod.value.equals ("")) @and (nom.value.equals (""))) {
+			  	listbox.dataPath = "/model:/printer[contains(codi, $cod)]";
+			}
+			if ((cod.value.equals ("")) @and !(nom.value.equals (""))) {		  	
+				listbox.dataPath = "/model:/printer[contains(model, $nom)]";
+			}
+			if (!(cod.value.equals ("")) @and !(nom.value.equals (""))) {		  	
+				listbox.dataPath = "/model:/printer[contains(codi, $cod)]";
+				listbox.dataPath = listbox.dataPath + "[contains(model, $nom)]";	 	        
+			} 
+		} 
+	} catch (Exception e) { e.printStackTrace (); }
+}
+				</source>
+				<p><i>showAltres</i></p>
+				<source>
+void showAltres () 
+{
+	if (view_altres==false) {
+		esquema.getFellow("queryWindow").setHeight("150px"); 
+		esquema.getFellow("queryWindow").getFellow("queryWindowAltres").setVisible(true);
+		esquema.getFellow("queryWindow").getFellow("img_altres").setSrc("~./img/fletxa-baix.gif");
+		view_altres = true;
+	} else {
+		esquema.getFellow("queryWindow").setHeight("77px"); 
+		esquema.getFellow("queryWindow").getFellow("queryWindowAltres").setVisible(false);
+		esquema.getFellow("queryWindow").getFellow("img_altres").setSrc("img/fletxa.gif");		  	
+		view_altres = false;
+	}
+}				
+				</source>
+				
+				<p>&#8226; Scripts associats a la gestió del navegador i el formulari de detalls</p>				
+				<p><i>onSelect</i></p>				
+				<source>
+void select () {
+	if (esquema.getFellow("lista").getFellow("listbox").selectedItem != null @and 
+		esquema.getFellow("lista").getFellow("listbox").selectedItem.value != null)
+		{
+			populateDetails ();
+			showDetall ();
+		}
+}				
+				</source>
+				<p><i>showLista</i></p>
+				<source>
+void showLista ()  
+{
+	esquema.getFellow("lista").getFellow("listbox").clearSelection();
+}
+				</source>
+				<p><i>showDetall</i></p>
+				<source>
+void showDetall () 
+{
+	esquema.showFormulari();
+}				
+				</source>
+				
+				<p>Adiccionalment, hem de fer referència a les següents inicialitzacions:</p>
+				<source>
+mode = "query"; 
+view_altres = false;
+void populateDetails ()
+{
+	mode="query";
+}				
+				</source>
+			</subsection>
+		</section>
+	</body>
+</document>

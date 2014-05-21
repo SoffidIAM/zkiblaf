@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="avisSortir" title="Tornar al menu"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml" > 
+
+	<window title="Tornar al menu" width="400px" border="normal" visible="false">
+		<attribute name="onInicia">
+			esquema = event.data;
+			if(self.mode.compareToIgnoreCase("modal") != 0){ 
+				self.doModal(); 
+			}
+			else{
+				self.visible = true; 
+			}
+		</attribute>
+		<vbox>
+			Hi ha canvis no guardats. Dessitja guardar-los abans d'anar al menu inicial?
+			<separator bar="true" spacing="10px"/>
+			<hbox style="margin-left:auto; margin-right:auto">
+				<button label="Guarda i continua">
+					<attribute name="onClick">
+						esquema.updateCanvis();
+						Executions.sendRedirect("inicial.zul");
+					</attribute>
+				</button>
+				<button label="Continua sense guardar" onClick='Executions.sendRedirect("/index.zul")' />
+			</hbox>
+			<separator spacing="5px"/>
+		</vbox>
+	</window>
+
+</zk>

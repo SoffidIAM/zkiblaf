@@ -1,0 +1,152 @@
+<document>
+	<properties>
+		<title>Descriptor XML</title>
+	</properties>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+	<body>
+		<section name="Fitxer descriptor XML">
+		
+			<p>Definició del model dinàmic de dades</p>
+			<source>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;zkib-model&gt;
+	&lt;datanode name="nomNodePare"&gt;
+		&lt;finder name="nomFinder" type="tipusFinder"&gt;
+			&lt;ejb-finder jndi="jndiHomeEJB" method="metodeLlista"&gt;
+			&lt;/ejb-finder&gt;
+			&lt;new-instance-bean className="nomClase"&gt;
+			&lt;/new-instance-bean&gt;
+		&lt;/finder&gt;
+	&lt;/datanode&gt;
+	
+	&lt;datanode name="nomNodeFill"&gt;
+		&lt;ejb-handler jndi="jndiHomeEJB"&gt;
+			&lt;insert-method method="metodexInsertar"&gt;
+				&lt;parameter value="${instance}"/&gt;
+			&lt;/insert-method&gt;
+			&lt;delete-method method="metodexEsborrar"&gt;
+				&lt;parameter value="${instance}"/&gt;
+			&lt;/delete-method&gt;
+			&lt;update-method method="metodexModificar"&gt;
+				&lt;parameter value="${instance}"/&gt;
+			&lt;/update-method&gt;
+		&lt;/ejb-handler&gt;
+	&lt;/datanode&gt;
+	
+&lt;/zkib-model&gt;
+				</source>
+				<p>El fitxer XML (anomenat descriptor XML) sempre té com a tag arrel:</p>
+				<source>
+&lt;zkib-model&gt;
+&lt;/zkib-model&gt;				
+				</source>
+				<p>Dins del tag arrel, se poden incloure un o més datanodes amb el format següent, on <i>name</i> és el nom únic que l'identificarà dins de l'interfície d'usuari, és a dir, el fitxer .zul:</p>
+				<source>
+&lt;datanode name=""&gt;
+&lt;/datanode&gt;	
+				</source>
+				<p>Dins de cada datanode, se poden incloure nodes de tipus <i>finder</i> o nodes de tipus <i>ejb-handler</i>, cadascún amb les seves pròpies característiques.</p>
+				<p>&#8226; Finder</p>
+				<source>
+&lt;finder name="nomFinder" type="tipusFinder"&gt;
+	&lt;ejb-finder jndi="jndiHomeEJB" method="metodeLlista"&gt;
+	&lt;/ejb-finder&gt;
+	&lt;new-instance-bean className="nomClase"&gt;
+	&lt;/new-instance-bean&gt;
+&lt;/finder&gt;
+				</source>
+				<p>S'encarreguen de recuperar les dades a través del mètode <i>metodeLlista</i> del EJB indicat al jndi <i>jndiHomeEJB</i>.</p>
+				<source>				
+&lt;ejb-finder jndi="jndiHomeEJB" method="metodeLlista"&gt;
+&lt;/ejb-finder&gt;
+				</source>
+				<p>A més, també s'encarreguen de crear noves instàncies de dades, amb:</p>
+				<source>
+&lt;new-instance-bean className="nomClase"&gt;
+&lt;/new-instance-bean&gt;
+				</source>
+				<p>Però, aquest tag <i>new-instance-bean</i> només s'haurà d'emprar si necessitem crear noves instàncies de <i>nomClase</i>. En cas que només se necessite recuperar les dades, únicament s'haurà d'utilitzar el tag <i>ejb-finder</i>.</p>
+				<p>Addicionalment, hem de comentar que dins del tag <i>ejb-finder</i>, també podem emprar paràmetres que necessita el <i>metodeLlista</i>, de la forma:</p>
+				<source>
+&lt;parameter value=""/&gt;
+				</source>
+				<p>I, també podem incloure dins del tag <i>new-instance-bean</i>, el següent, per indicar si hi ha valors que hauran de crear-se per defecte:</p>
+				<source>
+&lt;bean-attribute name="camp" value="valor"/&gt;
+				</source>
+				<p>&#8226; Handler</p>
+				<source>
+&lt;ejb-handler jndi="jndiHomeEJB"&gt;
+	&lt;insert-method method="metodexInsertar"&gt;
+		&lt;parameter value="${instance}"/&gt;
+	&lt;/insert-method&gt;
+	&lt;delete-method method="metodexEsborrar"&gt;
+		&lt;parameter value="${instance}"/&gt;
+	&lt;/delete-method&gt;
+	&lt;update-method method="metodexModificar"&gt;
+		&lt;parameter value="${instance}"/&gt;
+	&lt;/update-method&gt;
+&lt;/ejb-handler&gt;
+				</source>
+				<p>És l'encarregat de persistir l'objecte, és a dir, d'insertar, esborrar i actualitzar les dades a la base de dades, emprant els mètodes <i>metodexInsertar</i>, <i>metodexEsborrar</i> i <i>metodexModificar</i>.</p>
+				<p>A cadascún dels tags se poden emprar paràmetres, tal i com se mostra:</p>
+				<source>
+&lt;parameter value="${instance}"/&gt;
+				</source>
+				<p>Les variables predefinides que poden ser emprades al descriptor xml, són:</p>
+				<source>
+self = Objecte datanode en curs
+instance = Valor del datanode en curs
+parent = Datanode pare
+parent.instance = Valor del Datanode pare
+datasource = Datasource al que pertany
+				</source>
+				<p>Les variables s'empren amb el format: <i>${instance}</i>.</p>
+				<p>A més, dins dels tags <i>ejb-finder</i> i <i>ejb-handler</i>, també se poden emprar expresions EL amb els atributs <i>if</i> i <i>unless</i>, com per exemple:</p>
+				<source>
+&lt;ejb-finder jndi="jndiHomeEJB"
+	method="metodeLlista"
+	if="${cod != null || nom != null}"&gt;
+&lt;/ejb-finder&gt;
+
+&lt;ejb-finder jndi="jndiHomeEJB" 
+	method="metodeLlista" 
+	unless="${filtre_rols==null}"&gt;
+&lt;/ejb-finder&gt;
+				</source>
+				<p>Vegem un exemple amb dades reals:</p>
+				<source>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;zkib-model&gt;
+	&lt;datanode name="printers"&gt;
+		&lt;finder name="printer" type="printer"&gt;
+			&lt;ejb-finder jndi="seycon-3.0-SNAPSHOT/ejb/es.caib.seycon.ng.servei.ImpressoraService"
+				method="getImpressores"
+				if="${cod != null || nom != null}"&gt;
+			&lt;/ejb-finder&gt;
+			&lt;new-instance-bean className="es.caib.seycon.ng.comu.Impressora"&gt;
+			&lt;/new-instance-bean&gt;
+		&lt;/finder&gt;
+	&lt;/datanode&gt;
+	&lt;datanode name="printer"&gt;
+		&lt;ejb-handler jndi="seycon-3.0-SNAPSHOT/ejb/es.caib.seycon.ng.servei.ImpressoraService"&gt;
+			&lt;insert-method method="create"&gt;
+				&lt;parameter value="${instance}"/&gt;
+			&lt;/insert-method&gt;
+			&lt;delete-method method="delete"&gt;
+				&lt;parameter value="${instance}"/&gt;
+			&lt;/delete-method&gt;
+			&lt;update-method method="update"&gt;
+				&lt;parameter value="${instance}"/&gt;
+			&lt;/update-method&gt;
+		&lt;/ejb-handler&gt;
+	&lt;/datanode&gt;
+&lt;/zkib-model&gt;
+				</source>
+
+		</section>
+	</body>
+</document>

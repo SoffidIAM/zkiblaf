@@ -1,0 +1,20 @@
+<document>
+	<properties>
+		<title>HOW-TO</title>
+	</properties>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</head>
+	<body>
+		<section name="How to use">
+			<!-- PRIMERA SUBSECCIÓ -->		
+			<subsection name="Fitxer descriptor XML">
+				<p>El fitxer anomenat "Descriptor XML" conté la definició del model dinàmic de dades. Aquest fitxer defineix el comportament de cada tipus de dades.</p>
+			</subsection>
+			<!-- SEGONA SUBSECCIÓ -->
+			<subsection name="Fitxer d'interfície d'usuari">
+				<p>El fitxer .ZUL conté l'interfície d'usuari. Està definit amb components ZK.</p>
+			</subsection>
+		</section>
+	</body>
+</document>
