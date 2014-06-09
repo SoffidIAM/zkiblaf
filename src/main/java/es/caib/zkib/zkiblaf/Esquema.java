@@ -118,6 +118,7 @@ public class Esquema extends Window implements AfterCompose, Frameable
 
 		criterisHolder = new Vbox();
 		hbox.appendChild(criterisHolder);
+		criterisHolder.setWidth("100%");
 
 		HtmlBasedComponent criterisCap = new Hbox();
 		criterisHolder.appendChild(criterisCap);
