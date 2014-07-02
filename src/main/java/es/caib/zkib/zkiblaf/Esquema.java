@@ -361,10 +361,16 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		Events.sendEvent(this, ev2);
 		String thisUnits = getUnits(getAmple());
 		String ancho = getAmple().substring(0, getAmple().indexOf(thisUnits));
-		int anchoDiv2 = (int) ((Integer.parseInt(ancho) - 10) / 2);
-		llistaHolder.setWidth(anchoDiv2 + thisUnits);
-		llista.setWidth(anchoDiv2 + thisUnits);
-		formulariHolder.setWidth(anchoDiv2 + thisUnits);
+		try {
+			int anchoDiv2 = (int) ((Integer.parseInt(ancho) - 10) / 2);
+			llistaHolder.setWidth(anchoDiv2 + thisUnits); 
+			llista.setWidth(anchoDiv2 + thisUnits);
+			formulariHolder.setWidth(anchoDiv2 + thisUnits);
+		} catch (NumberFormatException e) {
+			llistaHolder.setWidth("50%"); 
+			llista.setWidth("100%");
+			formulariHolder.setWidth("50%");
+		}
 		llistaHolder.invalidate();
 		formulariHolder.setVisible(true);
 	}
