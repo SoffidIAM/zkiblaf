@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.zkoss.zk.ui.AbstractComponent;
+import org.zkoss.zk.ui.HtmlBasedComponent;
+import org.zkoss.zk.ui.HtmlMacroComponent;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Datebox;
@@ -16,6 +18,7 @@ import org.zkoss.zul.Listhead;
 import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Rows;
+import org.zkoss.zul.Textbox;
 
 import es.caib.zkib.component.DataGrid;
 import es.caib.zkib.component.DataLabel;
@@ -48,26 +51,46 @@ public class Exporter {
 		if (fill instanceof Listcell) {
 			// Primer afegim contingut
 			Listcell cell = (Listcell) fill;
-			s.append(cell.getLabel()+" "); //$NON-NLS-1$
+			String t = cell.getLabel().replaceAll("\"", "\'"); //$NON-NLS-1$
 			// I després mirem si en té fills:
+			s.append ( t );
+			boolean any = t.length() > 0 ;
 			List fills = cell.getChildren();
 			if (fills!=null) for (int i=0; i < fills.size(); i++) {
-				obteContingutFills(fills.get(i), s);
-			}			
+				StringBuffer sb = new StringBuffer();
+				obteContingutFills(fills.get(i), sb);
 
+				if (any && sb.length() > 0)
+					s.append (' ');
+				s.append (sb);
+				if (sb.length() > 0)
+					any = true;
+			}			
 		} else if (fill instanceof Datebox) {
 			// Datebox
 			Datebox datebox = (Datebox) fill;
-			s.append(datebox.getText()+" "); //$NON-NLS-1$
-		} else if (fill instanceof Div) {
-			Div div = (Div) fill;
+			s.append(datebox.getText());
+		} else if (fill instanceof Textbox) {
+			// Datebox
+			Textbox tb = (Textbox) fill;
+			s.append(tb.getText().replaceAll("\"", "\'")); //$NON-NLS-1$
+		} else if (fill instanceof Div || fill instanceof HtmlMacroComponent) {
+			HtmlBasedComponent div = (HtmlBasedComponent) fill;
 			// Hem de mirar els fills
 			List fills = div.getChildren();
+			boolean any = false;
 			if (fills!=null) for (int i=0; i < fills.size(); i++) {
-				obteContingutFills(fills.get(i), s);
+				StringBuffer sb = new StringBuffer();
+				obteContingutFills(fills.get(i), sb);
+
+				if (any && sb.length() > 0)
+					s.append (' ');
+				s.append (sb);
+				if (sb.length() > 0)
+					any = true;
 			}			
 		} else if (fill instanceof Label) {
-			s.append(((Label)fill).getValue()+" "); //$NON-NLS-1$
+			s.append(((Label)fill).getValue().replaceAll("\"", "\'")); //$NON-NLS-1$
 		}
 	}
 	
@@ -88,9 +111,14 @@ public class Exporter {
 			Listhead head = (Listhead) it.next();
 			StringBuffer h = new StringBuffer(""); //$NON-NLS-1$
 			Collection fills = head.getChildren();
+			boolean first = true;
 			for (Iterator fill = fills.iterator(); fill.hasNext();) {
+				if (first)
+					first = false;
+				else
+					h.append (SEPARADOR);
 				Listheader header = (Listheader) fill.next();
-				h.append(header.getLabel() + SEPARADOR);
+				h.append('"').append(header.getLabel()).append('"');
 			}
 			sb.append(h.toString() + "\r\n"); //$NON-NLS-1$
 		}
@@ -99,20 +127,30 @@ public class Exporter {
 			Listitem item = (Listitem) it.next();
 			StringBuffer i = new StringBuffer(""); //$NON-NLS-1$
 			Collection cells = item.getChildren();
+			boolean first = true;
 			if (cells!=null) for (Iterator itcell = cells.iterator(); itcell.hasNext();) {
 				Listcell cell = (Listcell) itcell.next();
+				if (first)
+					first = false;
+				else
+					i.append (SEPARADOR);
 				if (cell.getChildren()!=null && cell.getChildren().size() != 0) {
 					try {
 						// Analitzem els fills
+						i.append("\"");
 						obteContingutFills(cell,i); //si en té fills s'analitcen
-						i.append(SEPARADOR);
+						i.append("\"");
 					} catch (Exception ex) {
 						// Afegim el contingut
-						i.append(cell.getLabel() + SEPARADOR);
+						i.append("\"")
+							.append(cell.getLabel())
+							.append("\"");
 					}
 				} else {
 					// Añadimos el contenido
-					i.append(cell.getLabel() + SEPARADOR);
+					i.append("\"")
+						.append(cell.getLabel())
+						.append("\"");
 				}
 			}
 			// Sustituim - si cal - el salto de linia per un espai
@@ -143,10 +181,15 @@ public class Exporter {
 				Columns head = (Columns) it.next();
 				StringBuffer h = new StringBuffer(""); //$NON-NLS-1$
 				Collection fills = head.getChildren();
+				boolean first = true;
 				for (Iterator fill = fills.iterator(); fill
 						.hasNext();) {
+					if (first)
+						first = false;
+					else
+						h.append (SEPARADOR);
 					Column header = (Column) fill.next();
-					h.append(header.getLabel() + SEPARADOR);
+					h.append('"').append(header.getLabel()).append('"');
 				}
 				sb.append(h.toString() + "\r\n"); //$NON-NLS-1$
 			}
@@ -156,24 +199,34 @@ public class Exporter {
 				DataRow item = (DataRow) it.next();
 				List fillsFila = item.getChildren();
 				StringBuffer i = new StringBuffer(""); //$NON-NLS-1$
+				boolean first = true;
 				if (fillsFila!=null) for (Iterator f = fillsFila.iterator(); f.hasNext();) {
+					if (first)
+						first = false;
+					else
+						i.append (SEPARADOR);
 					AbstractComponent cell = (AbstractComponent) f.next();
 					if (cell.getChildren()!=null && cell.getChildren().size() != 0) {
 						try {
 							// Analitzem els fills
+							i.append("\"");
 							obteContingutFills(cell,i); //si en té fills s'analitcen
-							i.append(SEPARADOR);
+							i.append("\"");
 						} catch (Exception ex) {
 							// Afegim el contingut
 							if (cell instanceof Label) {
 								Label l_fill = (Label) cell;
-								i.append(l_fill.getValue() + SEPARADOR);
+								i.append("\"")
+									.append(l_fill.getValue())
+									.append("\"");
 							}
 						}
 					} else {
 						if (cell instanceof Label) {
 							Label l_fill = (Label) cell;
-							i.append(l_fill.getValue() + SEPARADOR);
+							i.append("\"")
+								.append(l_fill.getValue())
+								.append("\"");
 						}
 					}
 				}

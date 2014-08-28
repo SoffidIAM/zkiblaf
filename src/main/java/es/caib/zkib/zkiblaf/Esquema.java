@@ -362,10 +362,17 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		String thisUnits = getUnits(getAmple());
 		String ancho = getAmple().substring(0, getAmple().indexOf(thisUnits));
 		try {
-			int anchoDiv2 = (int) ((Integer.parseInt(ancho) - 10) / 2);
-			llistaHolder.setWidth(anchoDiv2 + thisUnits); 
-			llista.setWidth(anchoDiv2 + thisUnits);
-			formulariHolder.setWidth(anchoDiv2 + thisUnits);
+			if (! "%".equals(thisUnits))
+			{
+				int anchoDiv2 = (int) ((Integer.parseInt(ancho) - 10) / 2);
+				llistaHolder.setWidth(anchoDiv2 + thisUnits); 
+				llista.setWidth(anchoDiv2 + thisUnits);
+				formulariHolder.setWidth(anchoDiv2 + thisUnits);
+			} else {
+				llistaHolder.setWidth("50%"); 
+				llista.setWidth("100%");
+				formulariHolder.setWidth("50%");
+			}
 		} catch (NumberFormatException e) {
 			llistaHolder.setWidth("50%"); 
 			llista.setWidth("100%");

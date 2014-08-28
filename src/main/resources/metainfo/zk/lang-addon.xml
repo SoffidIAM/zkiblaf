@@ -110,6 +110,12 @@
 	</component>			
 	
 	<component>
+		<extends>toolbarbutton</extends>
+		<component-name>gridexporttoolbarbutton</component-name>
+		<component-class>es.caib.zkib.zkiblaf.GridExportToolbarbutton</component-class>
+	</component>			
+	
+	<component>
 		<extends>window</extends>
 		<component-name>esquemavertical</component-name>
 		<component-class>es.caib.zkib.zkiblaf.EsquemaVertical</component-class>
