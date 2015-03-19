@@ -18,6 +18,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.ext.AfterCompose;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
@@ -51,9 +52,9 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	HtmlBasedComponent criteris;
 	HtmlBasedComponent llista;
 	HtmlBasedComponent formulari;
-	Box criterisHolder;
-	Box llistaHolder;
-	Box formulariHolder;
+	Div criterisHolder;
+	Div llistaHolder;
+	Div formulariHolder;
 	Toolbar opt_toolbar; // Option toolbar
 	Toolbarbutton show_hide_search; // Show / hide search form
 	Checkbox check_show_always; // Show search form always
@@ -86,66 +87,51 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 
 	private void prepareSchema ()
 	{
-		// Part de dalt; criteris
-		Hbox hbox = new Hbox();
-		hbox.setWidth("100%"); //$NON-NLS-1$
-		super.insertBefore(hbox, null);
-
-		HtmlBasedComponent criterisTotal = new Vbox();
-		criterisTotal.setWidth("100%"); //$NON-NLS-1$
-		hbox.appendChild(criterisTotal);
-
-		HtmlBasedComponent criterisCap = new Hbox();
-		criterisTotal.appendChild(criterisCap);
+		Div div = new Div();
+		super.insertBefore(div, null);
 		Label titol = new Label();
 		titol.setValue(Messages.getString("EsquemaVertical.FindCriteria")); //$NON-NLS-1$
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
-		criterisCap.appendChild(titol);
+		div.insertBefore(titol, null);
 
 		defineToolbarElements();
 
-		HtmlBasedComponent show_criteria_opt = new Vbox();
+		HtmlBasedComponent show_criteria_opt = new Div();
 		show_criteria_opt.setWidth("100%"); //$NON-NLS-1$
-		criterisTotal.appendChild(show_criteria_opt);
 		show_criteria_opt.appendChild(opt_toolbar);
+		div.insertBefore(show_criteria_opt, null);
 
-		criterisHolder = new Vbox();
-		criterisTotal.appendChild(criterisHolder);
+		// Part d'adalt; criteris
+		criterisHolder = new Div();
+		criterisHolder.setSclass("query");
+		div.insertBefore(criterisHolder, null);
 		criterisHolder.setVisible(getCriterisVisible());
-		criterisHolder.setWidth("100%");
 
-		// Part d'enmig; llista
-		hbox = new Hbox();
-		hbox.setWidth("100%"); //$NON-NLS-1$
-		super.insertBefore(hbox, null);
-		llistaHolder = new Vbox();
-		llistaHolder.setWidth("100%");
-		hbox.appendChild(llistaHolder);
+		// Part d'enmig; llista i formulari
+		// Llista
+		llistaHolder = new Div();
+		llistaHolder.setSclass("record-list");
+		super.insertBefore(llistaHolder, null);
 		titol = new Label();
 		titol.setValue(Messages.getString("EsquemaVertical.Browser")); //$NON-NLS-1$
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
 		llistaHolder.appendChild(titol);
-
-		// Part de baix; formulari
-		hbox = new Hbox();
-		hbox.setWidth("100%"); //$NON-NLS-1$
-		super.insertBefore(hbox, null);
-		formulariHolder = new Vbox();
-		formulariHolder.setWidth("100%");
-		hbox.appendChild(formulariHolder);
-		Hbox headerBox = new Hbox();
+		// Formulari
+		formulariHolder = new Div();
+		formulariHolder.setClass("record-form-shrinked");
+		super.insertBefore(formulariHolder, null);
+		Div headerBox = new Div();
 		headerBox.setWidth("100%"); //$NON-NLS-1$
 		formulariHolder.appendChild(headerBox);
 		titol = new Label();
 		titol.setValue(Messages.getString("EsquemaVertical.Details")); //$NON-NLS-1$
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
 		headerBox.appendChild(titol);
-		ImageClic botoTancarFormulari = new ImageClic();
-		botoTancarFormulari.setSrc("~./img/tanca.png"); //$NON-NLS-1$
-		botoTancarFormulari.setAlign("right"); //$NON-NLS-1$
-		botoTancarFormulari.setTooltiptext(Messages
-				.getString("EsquemaVertical.CloseDetails")); //$NON-NLS-1$
-		botoTancarFormulari.addEventListener("onClick", new EventListener() { //$NON-NLS-1$
+		ImageClic botoTancar = new ImageClic();
+		botoTancar.setSrc("~./img/tanca.png"); //$NON-NLS-1$
+		botoTancar.setAlign("right"); //$NON-NLS-1$
+		botoTancar.setTooltiptext(Messages.getString("EsquemaVertical.CloseDetails")); //$NON-NLS-1$
+		botoTancar.addEventListener("onClick", new EventListener() { //$NON-NLS-1$
 					public boolean isAsap ()
 					{
 						return true;
@@ -157,7 +143,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 						hideFormulari();
 					};
 				});
-		headerBox.appendChild(botoTancarFormulari);
+		headerBox.appendChild(botoTancar);
 		formulariHolder.setVisible(false);
 	}
 
@@ -328,13 +314,25 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	{
 		Event ev2 = new Event("onShowFormulari", this); //$NON-NLS-1$
 		Events.sendEvent(this, ev2);
-
 		if (!formulariHolder.isVisible())
 		{
-			llistaHolder.setHeight(getHeight());
-			llista.setHeight(getHeight());
-			formulariHolder.setHeight(formulari.getHeight());
+			llistaHolder.setSclass("record-list-shrinked");
+			llistaHolder.invalidate();
+			formulariHolder.setSclass("record-form");
 			formulariHolder.setVisible(true);
+		}
+	}
+
+	public void hideFormulari ()
+	{
+		Event ev2 = new Event("onHideFormulari", this); //$NON-NLS-1$
+		Events.sendEvent(this, ev2);
+
+		if (formulariHolder.isVisible())
+		{
+			formulariHolder.setVisible(false);
+			llistaHolder.setSclass("record-list");
+			formulariHolder.setSclass("record-form-shrinked");
 			llistaHolder.invalidate();
 		}
 	}
@@ -342,21 +340,6 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	public boolean isFormulariVisible ()
 	{
 		return formulariHolder.isVisible();
-	}
-
-	public void hideFormulari ()
-	{
-		Event ev2 = new Event("onHideFormulari", EsquemaVertical.this); //$NON-NLS-1$
-
-		Events.sendEvent(EsquemaVertical.this, ev2);
-
-		formulariHolder.setVisible(false);
-
-		llistaHolder.setHeight(getHeight());
-		llista.setHeight(getHeight());
-		llistaHolder.invalidate();
-
-		showCriteris();
 	}
 
 	private void mostraCriteris ()
@@ -694,5 +677,9 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	public void tancaDetalls ()
 	{
 		hideFormulari();
+	}
+
+	public String getSclass() {
+		return super.getSclass()+" frame-vertical";
 	}
 }

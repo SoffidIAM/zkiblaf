@@ -16,6 +16,7 @@ public class Frame extends Vbox implements Frameable {
 
 	public Frame ()
 	{
+		setSclass("outer-frame");
 		addEventListener("onCreate", new EventListener() { //$NON-NLS-1$
 			public void onEvent(Event event) throws Exception {
 				Application.registerPage(Frame.this);

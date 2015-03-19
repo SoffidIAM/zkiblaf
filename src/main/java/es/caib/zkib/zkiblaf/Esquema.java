@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.ext.AfterCompose;
 import org.zkoss.zul.Box;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
@@ -45,11 +46,10 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	HtmlBasedComponent criteris;
 	HtmlBasedComponent llista;
 	HtmlBasedComponent formulari;
-	Box criterisHolder;
-	Box llistaHolder;
-	Box formulariHolder;
+	Div criterisHolder;
+	Div llistaHolder;
+	Div formulariHolder;
 	public boolean saveContent;
-	String ample = "98%"; //$NON-NLS-1$
 	Toolbar opt_toolbar; // Option toolbar
 	Toolbarbutton clear_criteria; // Clear search parameters
 	ImageClic img_clear;
@@ -109,16 +109,10 @@ public class Esquema extends Window implements AfterCompose, Frameable
 
 	private void prepareSchema ()
 	{
-		this.setWidth(ample);
-
 		// Part d'adalt; criteris
-		Hbox hbox = new Hbox();
-		hbox.setWidth("100%"); //$NON-NLS-1$
-		super.insertBefore(hbox, null);
-
-		criterisHolder = new Vbox();
-		hbox.appendChild(criterisHolder);
-		criterisHolder.setWidth("100%");
+		criterisHolder = new Div();
+		criterisHolder.setSclass("query");
+		super.insertBefore(criterisHolder, null);
 
 		HtmlBasedComponent criterisCap = new Hbox();
 		criterisHolder.appendChild(criterisCap);
@@ -134,24 +128,22 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		criterisHolder.appendChild(show_criteria_opt);
 		show_criteria_opt.appendChild(opt_toolbar);
 
-		hbox.setVisible(!isSenseCriteris());
+		criterisHolder.setVisible(!isSenseCriteris());
 
 		// Part d'enmig; llista i formulari
-		hbox = new Hbox();
-		hbox.setWidth("100%"); //$NON-NLS-1$
-		super.insertBefore(hbox, null);
-
 		// Llista
-		llistaHolder = new Vbox();
-		hbox.appendChild(llistaHolder);
+		llistaHolder = new Div();
+		llistaHolder.setSclass("record-list");
+		super.insertBefore(llistaHolder, null);
 		titol = new Label();
 		titol.setValue(Messages.getString("Esquema.Browser")); //$NON-NLS-1$
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
 		llistaHolder.appendChild(titol);
 		// Formulari
-		formulariHolder = new Vbox();
-		hbox.appendChild(formulariHolder);
-		Hbox headerBox = new Hbox();
+		formulariHolder = new Div();
+		formulariHolder.setClass("record-form-shrinked");
+		super.insertBefore(formulariHolder, null);
+		Div headerBox = new Div();
 		headerBox.setWidth("100%"); //$NON-NLS-1$
 		formulariHolder.appendChild(headerBox);
 		titol = new Label();
@@ -359,26 +351,9 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	{
 		Event ev2 = new Event("onShowFormulari", this); //$NON-NLS-1$
 		Events.sendEvent(this, ev2);
-		String thisUnits = getUnits(getAmple());
-		String ancho = getAmple().substring(0, getAmple().indexOf(thisUnits));
-		try {
-			if (! "%".equals(thisUnits))
-			{
-				int anchoDiv2 = (int) ((Integer.parseInt(ancho) - 10) / 2);
-				llistaHolder.setWidth(anchoDiv2 + thisUnits); 
-				llista.setWidth(anchoDiv2 + thisUnits);
-				formulariHolder.setWidth(anchoDiv2 + thisUnits);
-			} else {
-				llistaHolder.setWidth("50%"); 
-				llista.setWidth("100%");
-				formulariHolder.setWidth("50%");
-			}
-		} catch (NumberFormatException e) {
-			llistaHolder.setWidth("50%"); 
-			llista.setWidth("100%");
-			formulariHolder.setWidth("50%");
-		}
+		llistaHolder.setSclass("record-list-shrinked");
 		llistaHolder.invalidate();
+		formulariHolder.setSclass("record-form");
 		formulariHolder.setVisible(true);
 	}
 
@@ -387,8 +362,8 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		Event ev2 = new Event("onHideFormulari", Esquema.this); //$NON-NLS-1$
 		Events.sendEvent(Esquema.this, ev2);
 		formulariHolder.setVisible(false);
-		llistaHolder.setWidth(getAmple());
-		llista.setWidth(getAmple());
+		llistaHolder.setSclass("record-list");
+		formulariHolder.setSclass("record-form-shrinked");
 		llistaHolder.invalidate();
 	}
 
@@ -456,22 +431,11 @@ public class Esquema extends Window implements AfterCompose, Frameable
 
 	public String getAmple ()
 	{
-		return ample;
+		return null;
 	}
 
 	public void setAmple (String ample)
 	{
-		this.ample = ample;
-	}
-
-	public String getWidth ()
-	{
-		return getAmple();
-	}
-
-	public void setWidth (String width)
-	{
-		super.setWidth(width);
 	}
 
 	public boolean isSenseCriteris ()
@@ -561,4 +525,8 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		this.idComponentFocus = idComponentFocus;
 	}
 
+	
+	public String getSclass() {
+		return super.getSclass()+" frame";
+	}
 }

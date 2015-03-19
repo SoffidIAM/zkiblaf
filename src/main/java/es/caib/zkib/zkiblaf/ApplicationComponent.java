@@ -132,6 +132,8 @@ public class ApplicationComponent extends Vbox {
 		HashMap hmap = new HashMap();
 		hmap.put("showProfile", new Boolean (showProfile));
 		window = (Window) Executions.createComponents("~./zkiblaf/zul/application.zul", this, hmap); //$NON-NLS-1$
+		if (window != getChildren().get(0))
+			this.insertBefore(window, (Component) getChildren().get(0));
 		workArea = window.getFellow("workArea"); //$NON-NLS-1$
 		titleLabel = (Label) window.getFellow("title"); //$NON-NLS-1$
 		titleLabel.setSclass("maintitle");//Posem estils css //$NON-NLS-1$

@@ -1,9 +1,22 @@
 /* Títol */
-.title td, .title .caption td {
-	font-family: Arial; font-size: 11pt; font-weight: bold;
+.title td, .title .caption td 
+{
+	font-family: Arial; font-weight: bold;
 	padding-top: 2px; padding-bottom: 3px; margin-bottom: 10px;
-	background: #0e5462; color: white; border: none;
+	
 }
+
+.title td, .title .caption td ,
+td.lwt-modal, td.lwt-highlighted, td.lwt-overlapped,
+td.mwt-modal, td.mwt-highlighted, td.mwt-overlapped,
+td.rwt-modal, td.rwt-highlighted, td.rwt-overlapped
+{
+	color: white; border: none;
+	background-color: #22B9D8; font-size: 13pt;
+	background-image: none;
+	
+}
+
 
 /* Opcions del manteniment: Afegir nou, Eliminar sel·leccionat i Confirmar canvis */
 .title .caption a, .title .caption a:visited{
@@ -16,7 +29,7 @@
 
 /* Títol azul de les capses */
 .titol_capsa {
-	font-family: Arial;	font-size: 11px; font-weight: bold; color: #0e5462;
+	font-family: Arial;	font-size: 13px; font-weight: bold; color: #22B9D8;
 }
 
 /* Títol taronja de tancar la sessió i tornar el menu */
@@ -26,6 +39,7 @@
 	font-weight: bold; 
 	color: #FFF;
 	cursor: pointer;
+	margin-left: 1em;
 }
 /* Lo "destacamos" cuando el ratón se pone encima */
 .titol_tanca:hover {
@@ -35,12 +49,12 @@
 
 /* Borde dels windows de tipus Llista */
 div.wc-modal, div.wc-modal-none, div.wc-highlighted, div.wc-highlighted-none {
-	border: 2px solid #0e5462; background: #FFF;
+	border: 2px solid #22B9D8; background: #FFF;
 }
 
 /* Linia superior de l'aplicació */
 .topline {
-	background-color: #0e5462;
+	background-color: #22B9D8;
 	margin: 0 0 4px 0;
 	border-bottom:0.3em solid #70a3cc;
 	padding: 2px 3px;
@@ -49,25 +63,30 @@ div.wc-modal, div.wc-modal-none, div.wc-highlighted, div.wc-highlighted-none {
 }
 
 * {margin:0;padding:0;}
-html, body {height: 100%; width: 100%;padding: 0px !important;}
+html, body {height: 100%; width: 100%;padding: 0px !important; 	box-sizing: border-box; }
+*, *:before, *:after {  box-sizing: inherit; }
+div.z-loading-indicator {box-sizing: content-box;}
+
 .col_der, .col_izq, .col_cen {height: 100%;}
 .col_der {
 	float: right; 
 	text-align:right;
 	vertical-align:middle;
 	padding-right:5px;
+	padding-top: 10px;
 }
 .col_izq {
 	float: left;
 	vertical-align:middle;
 }
 .col_cen {
-	text-align:center;
 	vertical-align:middle;
 	margin: 5px auto;
 	white-space: nowrap;
 	max-width: 50%;
 	overflow: hidden;
+	height: 19px;
+	display: inline-block;
 }
 /* Titol principal */
 
@@ -76,6 +95,7 @@ html, body {height: 100%; width: 100%;padding: 0px !important;}
 	font-size: 18px; 
 	font-weight: bold; 
 	color: #FFF;
+	padding-top: 2px; padding-bottom: 3px; margin-bottom: 10px;
 }
 
 .startmenu {
@@ -136,7 +156,7 @@ html, body {height: 100%; width: 100%;padding: 0px !important;}
 
 .codiusuari {
 	font-weight: bold;
-	color: #70a3cc;	
+	color: #22B9D8;	
 	cursor: pointer;
 }
 .codiusuari:hover{
@@ -147,7 +167,7 @@ html, body {height: 100%; width: 100%;padding: 0px !important;}
 	top: 35px !important;
 	left: 0px !important;
 	position:absolute;	
-	border: 1px solid #70a3cc;
+	border: 1px solid #22B9D8;
 }
 
 .menufavorits {
@@ -168,10 +188,11 @@ html, body {height: 100%; width: 100%;padding: 0px !important;}
 
 /* Capsa dels criteris de cerca */
 .capsa_cerca {
+	padding: 2px;
 	border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;
 	border-top-style: solid; border-right-style: solid; border-bottom-style: solid;	border-left-style: solid;
-	border-top-color: #0e5462; border-right-color: #0e5462; border-bottom-color: #0e5462; border-left-color: #0e5462;
-	width: 800px; height: 77px; padding-top:5px; padding-bottom:5px; overflow: hidden;
+	border-top-color: #637792; border-right-color: #637792; border-bottom-color: #637792; border-left-color: #637792;
+	height: 77px; padding-top:5px; padding-bottom:5px; overflow: hidden;
 	margin-bottom: 7px;
 }
 
@@ -179,7 +200,7 @@ html, body {height: 100%; width: 100%;padding: 0px !important;}
 .capsa_navegador {
 	border-top-width: 6px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;
 	border-top-style: solid; border-right-style: solid; border-bottom-style: solid;	border-left-style: solid;
-	border-top-color: #0e5462; border-right-color: #0e5462; border-bottom-color: #0e5462; border-left-color: #0e5462;
+	border-top-color: #637792; border-right-color: #637792; border-bottom-color: #637792; border-left-color: #637792;
 	/*width: 800px;*/ padding-top:0px; padding-bottom:0px; overflow: hidden;
 	margin-bottom: 7px;
 }
@@ -188,14 +209,15 @@ html, body {height: 100%; width: 100%;padding: 0px !important;}
 .capsa_detalls {
 	border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;
 	border-top-style: solid; border-right-style: solid; border-bottom-style: solid;	border-left-style: solid;
-	border-top-color: #0e5462; border-right-color: #0e5462; border-bottom-color: #0e5462; border-left-color: #0e5462;
-	/*width: 500px;*/ padding-top:0px; padding-bottom:0px; overflow: auto;
+	border-top-color: #637792; border-right-color: #637792; border-bottom-color: #637792; border-left-color: #637792;
+	/*width: 500px;*/ overflow: auto;
+	padding: 0px;
 	margin-bottom: 7px;
 }
 
 /* Entrada de dades: textbox */
 .text, .textbox {
-	font-family: Arial;	font-size: 12px;
+	font-family: Arial;	font-size: 11px;
 	border: 1px solid #7F9196; /*width: 135px;*/
 	background-image: none;
 }
@@ -206,7 +228,7 @@ input [type="checkbox"] {
 
 /* Entrada de dades: interior dels textbox */
 textarea {
-	font-family: Arial;	font-size: 11px; font-weight: bold;
+	font-family: Arial;	font-size: 11px; 
 }
 
 /* Etiquetes: label */
@@ -219,7 +241,7 @@ span {
 }
 
 .etiqueta {
-	font-family: Arial;	font-size: 11px; font-weight: bold; margin-left:3px; color: black; vertical-align: middle;	
+	font-family: Arial;	font-size: 11px; margin-left:3px; font-weight: normal; color: black; vertical-align: middle;	
 }
 
 .nowrap {
@@ -253,19 +275,30 @@ span {
 }
 
 /* Botons */
-button {
- 	font-family: Arial;	font-size: 11px; color: black;
- 	padding:5px 10px 6px 7px;
+button, input[type="button"] {
+	background-color: white;
+	border: 1px solid #9EC73C;
+	border-image: none;
+	padding: 4px;
+	margin-left: 4px;
+	margin-right: 4px;
+	color: #7F9FC2;
+}	
+
+/* Buttons */
+button:hover, input[type="button"]:hover {
+	background-color: #9EC73C;
+	color: white;
 }
 
 /* Barra de botons */
 .toolbar {
-	padding: 2px; border: 1px; border-top:0.1px solid white; background: #0e5462; 
+	padding: 2px; border: 1px; border-top:0.1px solid white; background: #637792; 
 }
 
 .toolbar a, .toolbar a:visited, .toolbar a:hover {
 	font-family: Arial;	font-size: 11px; font-weight: bold; color: #FFF;
-	border: 0px; text-decoration: none; background: #0e5462;
+	border: 0px; text-decoration: none; background: #637792;
 	white-space:nowrap; 
 }
 
@@ -286,7 +319,7 @@ button {
 
 /* Títols de les capceleres dels listbox, trees i grids */
 div.head-cell-inner {
-	font-family: Arial;	font-size: 11px; font-weight: bold; color: black; text-align: left;
+	font-family: Arial;	font-size: 11px; font-weight: normal; color: black; text-align: left;
 }
 	
 tr.odd {
@@ -302,24 +335,24 @@ div.listbox {
 /* Capçalera del listbox i del tree */
 div.listbox-head th, div.listbox-paging th, div.tree-head th, div.tree-paging th {
 	font-family: Arial;	font-size: 21px; color: black;	
-	background: threedface;
+	background: #9ec73c;
 	overflow: hidden;
-	border-top: 1px solid threedhighlight;
-	border-bottom: 1px solid threedshadow;
-	border-left: none !important;
-	border-right: none !important;
-	background-image:url('../img/bizqder.gif');
+	border-top: none;
+	border-bottom: none;
+	border-left: 1px solid #779429 !important;
+	border-right: 1px solid #cfff4e !important;
+/*	background-image:url('../img/bizqder.gif');
 	background-repeat:repeat-y;
-	background-position: top right
+	background-position: top right*/
 }
 
 div.listbox-head th:last-child, 
 div.listbox-paging th:last-child, 
 div.tree-head th:last-child, 
 div.tree-paging th:last-child {
-	background-image:url('../img/bder.gif');
+/*	background-image:url('../img/bder.gif');
 	background-repeat:repeat-y;
-	background-position: top right
+	background-position: top right*/
 }
 
 div.listbox-head th div, 
@@ -330,6 +363,8 @@ div.tree-paging th div,
 div.grid-head th div {
 	padding-left: 1px;
 }
+
+div.listbox-head { background-color: #9ec73c; }
 
 /* Font del contingut del listbox i del tree (capçalera i files) */
 div.head-cell-inner, div.cell-inner {
@@ -367,28 +402,23 @@ div.grid, div.grid-body {
 
 div.grid-head th {
 	font-family: Arial;	font-size: 11px; color: black;	
-	/*border: 1px 0px solid #606E72;*/ 
-	background: threedface; 
+	background: #9ec73c;
 	overflow: hidden;
-	/*border-color: threedhighlight threedshadow threedshadow threedhighlight;*/
-	border-top: 1px solid threedhighlight;
-	border-bottom: 1px solid threedshadow;
-	border-left: none;
-	border-right: none;
-	background-image:url('../img/bizqder.gif');
-	background-repeat:repeat-y;
-	background-position: top right
+	border-top: none;
+	border-bottom: none;
+	border-left: 1px solid #779429 !important;
+	border-right: 1px solid #cfff4e !important;
 }
 
 div.grid-head th:last-child {
-	background-image:url('../img/bder.gif');
+	/* background-image:url('../img/bder.gif');
 	background-repeat:repeat-y;
-	background-position: top right
+	background-position: top right */
 }
 
 /* Files del grid */
 tr.grid td.gc { 
-	font-family: Arial;	font-size: 11px; color: black; background: #EEE; 
+	font-family: Arial;	font-size: 11px; color: black; background: white; 
 	border-bottom: none; border-left: 1px solid #FFF; border-right: 1px solid #606E72; border-top: 1px solid #DDD; 
 	padding: 2px;
 }
@@ -397,6 +427,7 @@ tr.grid td.gc {
 /*table.grid-btable tr.odd td {
 	background-color: #FAEBD7 !important;
 }*/
+
 
 /* Bara inicial de seycon-web */
 td.lwt-embedded, td.mwt-embedded, td.rwt-embedded { 
@@ -467,7 +498,7 @@ div.tabpanel {
 }
 
 div.wc-capsa_detalls-none {
-	padding:5px 0 0 2px;
+	padding:0px 0 0 0px;
 }
 
 /* fons per defecte del components a blan */
@@ -541,7 +572,7 @@ div.menubar{
 	color: #FFF;
 	padding: 1px 1px 1px 0px; border: 0px; 
 	border-top:0.1px solid white; 
-	background-color: #0e5462;
+	background-color: #637792;
 }
 
 div.menupopup {
@@ -592,4 +623,41 @@ div.menupopup a  {
 
 .checkbox_border input {
 	margin-top: 2px;
+}
+
+
+.outer-frame {padding: 16px;}
+.tabpanel-real {padding: 8px;}
+div.frame-none {width: 100%; padding: 0px; border: none}
+div.frame-vertical-none {width: 100%; padding: 0px; border:none}
+
+div.frame-none div.record-list { width: 100%}
+div.frame-none div.record-list-shrinked { width: 45%; vertical-align: top; display: inline-block;}
+
+div.frame-none div.record-form { width: 50%; vertical-align: top; display: inline-block; margin-left: 5%}
+div.frame-none div.record-form-shrinked { display: none;}
+
+div.frame-vertical-none div.record-list { width: 100% }
+div.frame-vertical-none div.record-list-shrinked { width: 100%;}
+
+div.frame-vertical-none div.record-form { width: 100%;}
+div.frame-vertical-none div.record-form-shrinked { display: none;}
+
+div.listbox-head th.sort div.head-cell-inner,
+div.grid-head th.sort div.head-cell-inner {
+	background: transparent url(../img/sort_hint.png);
+	background-position: 99% center;
+	background-repeat: no-repeat;
+}
+
+div.listbox-head th.sort-asc div.head-cell-inner, div.grid-head th.sort-asc div.head-cell-inner {
+  background: transparent url(../img/sort_hint_up.png);
+  background-position: 99% center;
+  background-repeat: no-repeat;
+}
+
+div.listbox-head th.sort-dsc div.head-cell-inner, div.grid-head th.sort-dsc div.head-cell-inner {
+  background: transparent url(../img/sort_hint_down.png);
+  background-position: 99% center;
+  background-repeat: no-repeat;
 }
