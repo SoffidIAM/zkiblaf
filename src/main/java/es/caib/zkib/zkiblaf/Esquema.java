@@ -67,6 +67,7 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	}
 
 	public boolean canClose = true;
+	private ImageClic botoTancar;
 
 	public boolean canClose ()
 	{
@@ -150,7 +151,7 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		titol.setValue(Messages.getString("Esquema.DetailsLabel")); //$NON-NLS-1$
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
 		headerBox.appendChild(titol);
-		ImageClic botoTancar = new ImageClic();
+		botoTancar = new ImageClic();
 		botoTancar.setSrc("~./img/tanca.png"); //$NON-NLS-1$
 		botoTancar.setAlign("right"); //$NON-NLS-1$
 		botoTancar.setTooltiptext(Messages.getString("Esquema.CloseDetail")); //$NON-NLS-1$
@@ -350,7 +351,7 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	public void showFormulari ()
 	{
 		Event ev2 = new Event("onShowFormulari", this); //$NON-NLS-1$
-		Events.sendEvent(this, ev2);
+		Events.postEvent(ev2);
 		llistaHolder.setSclass("record-list-shrinked");
 		llistaHolder.invalidate();
 		formulariHolder.setSclass("record-form");
@@ -360,7 +361,7 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	public void hideFormulari ()
 	{
 		Event ev2 = new Event("onHideFormulari", Esquema.this); //$NON-NLS-1$
-		Events.sendEvent(Esquema.this, ev2);
+		Events.postEvent(ev2);
 		formulariHolder.setVisible(false);
 		llistaHolder.setSclass("record-list");
 		formulariHolder.setSclass("record-form-shrinked");
@@ -528,5 +529,14 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	
 	public String getSclass() {
 		return super.getSclass()+" frame";
+	}
+
+	public void removeCriteria () {
+		criterisHolder.setVisible(false);
+	}
+	
+	public void removeList () {
+		llistaHolder.setVisible(false);
+		botoTancar.setVisible(false);
 	}
 }

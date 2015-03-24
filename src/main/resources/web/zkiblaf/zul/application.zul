@@ -19,11 +19,14 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss
 	</zscript>
 	<div sclass="topline">
 		<div align="right" sclass="col_der">
-			<div sclass="benvingutmsg">
+			<div sclass="benvingutmsg" unless="${arg.embed}">
 				<label sclass="benvingut" value="${c:l('zkiblaf.lblUsuario')}: "/>
 		    	<label if="${arg.showProfile}" onClick='es.caib.zkib.zkiblaf.Application.setPage("perfil/perfil.zul")' sclass="codiusuari" value="${nom} (${usuari})"/>
 				<label if="${!arg.showProfile}" sclass="codiusuari" onClick="openMenu();" value="${usuari}"/>	
 				<label if="${arg.showProfile}" id="logoutButton" sclass="titol_tanca" value="${c:l('zkiblaf.tancarSessio')}"/>
+			</div>
+			<div sclass="benvingutmsg" if="${arg.embed}">
+				<label sclass="codiusuari" value="${usuari}"/>
 			</div>
 			<div>
 				<label if="${!arg.showProfile}" id="otherlogoutButton" sclass="menuperfil menu-display shadow-window" style="display:none;" value="${c:l('zkiblaf.tancarSessio')}" width="15em"/>
@@ -32,11 +35,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss
 
 
 		<div sclass="col_izq">
-			<div id="menuButton" sclass="startmenu">
+			<div id="menuButton" sclass="startmenu" if="${!arg.embed}">
 				<h:img src="icons/logo-letras.png" id="logo"/>
 				<label sclass="inici" value="${c:l('zkiblaf.Inici')} " />
-				<image src="icons/downself.png"/>
+				<image src="icons/downself.png" />
 			</div>
+			<h:img src="icons/logo-letras.png" id="logo" if="${arg.embed}"/>
 		</div>
 
 		<div sclass="col_cen">

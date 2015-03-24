@@ -39,7 +39,15 @@ public class ApplicationComponent extends Vbox {
 	String name;
 	String menu;
 	String favorits; //ruta del menu favorits
-	
+	boolean embed = false;
+	public boolean isEmbed() {
+		return embed;
+	}
+
+	public void setEmbed(boolean embed) {
+		this.embed = embed;
+	}
+
 	/*
 	 * Indica si es mostren els favorits. Per defecte amagats -- u88683
 	 */
@@ -131,6 +139,7 @@ public class ApplicationComponent extends Vbox {
 		Application.registerApplication (this);
 		HashMap hmap = new HashMap();
 		hmap.put("showProfile", new Boolean (showProfile));
+		hmap.put("embed", new Boolean (embed));
 		window = (Window) Executions.createComponents("~./zkiblaf/zul/application.zul", this, hmap); //$NON-NLS-1$
 		if (window != getChildren().get(0))
 			this.insertBefore(window, (Component) getChildren().get(0));
@@ -200,21 +209,23 @@ public class ApplicationComponent extends Vbox {
 			}
 		});
 
-		Component menubutton = window.getFellow("menuButton"); //$NON-NLS-1$
-		menubutton.addEventListener("onClick", new EventListener() { //$NON-NLS-1$
-			public void onEvent(Event event) throws Exception {
-				if (getMenu() == null)
-				{
-					throw new UiException(es.caib.zkib.zkiblaf.Messages.getString("ApplicationComponent.MenuItemSelectedError")); //$NON-NLS-1$
+		if (! embed)
+		{
+			Component menubutton = window.getFellow("menuButton"); //$NON-NLS-1$
+			menubutton.addEventListener("onClick", new EventListener() { //$NON-NLS-1$
+				public void onEvent(Event event) throws Exception {
+					if (getMenu() == null)
+					{
+						throw new UiException(es.caib.zkib.zkiblaf.Messages.getString("ApplicationComponent.MenuItemSelectedError")); //$NON-NLS-1$
+					}
+					Window menu = (Window) Path.getComponent(ApplicationComponent.this.getSpaceOwner(), getMenu());
+					menu.setTop("29px"); //$NON-NLS-1$
+					menu.setLeft("5px"); //$NON-NLS-1$
+					if(!menu.isVisible())
+						menu.doPopup();
 				}
-				Window menu = (Window) Path.getComponent(ApplicationComponent.this.getSpaceOwner(), getMenu());
-				menu.setTop("29px"); //$NON-NLS-1$
-				menu.setLeft("5px"); //$NON-NLS-1$
-				if(!menu.isVisible())
-					menu.doPopup();
-			}
-		});
-		
+			});
+		}
 		if (isShowFavorites()) {
 			Component favoritswindow = window.getFellow("favoritsButton"); //$NON-NLS-1$
 			favoritswindow.addEventListener("onClick", new EventListener() { //$NON-NLS-1$

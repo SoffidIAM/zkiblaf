@@ -68,6 +68,8 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	private final String IMG_CRITERIS_NO_VISIBLE = "~./img/fletxa-marro.gif"; //$NON-NLS-1$
 	private final String IMG_CLEAR_CRITERIA = "~./img/reload-petit16.png"; //$NON-NLS-1$
 	private boolean botoAmagarVisible = true; // Hide show search button
+	private Div criterisDiv;
+	private ImageClic botoTancar;
 
 	private String getImgCriterisVisible ()
 	{
@@ -87,24 +89,24 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 
 	private void prepareSchema ()
 	{
-		Div div = new Div();
-		super.insertBefore(div, null);
+		criterisDiv = new Div();
+		super.insertBefore(criterisDiv, null);
 		Label titol = new Label();
 		titol.setValue(Messages.getString("EsquemaVertical.FindCriteria")); //$NON-NLS-1$
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
-		div.insertBefore(titol, null);
+		criterisDiv.insertBefore(titol, null);
 
 		defineToolbarElements();
 
 		HtmlBasedComponent show_criteria_opt = new Div();
 		show_criteria_opt.setWidth("100%"); //$NON-NLS-1$
 		show_criteria_opt.appendChild(opt_toolbar);
-		div.insertBefore(show_criteria_opt, null);
+		criterisDiv.insertBefore(show_criteria_opt, null);
 
 		// Part d'adalt; criteris
 		criterisHolder = new Div();
 		criterisHolder.setSclass("query");
-		div.insertBefore(criterisHolder, null);
+		criterisDiv.insertBefore(criterisHolder, null);
 		criterisHolder.setVisible(getCriterisVisible());
 
 		// Part d'enmig; llista i formulari
@@ -127,7 +129,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 		titol.setValue(Messages.getString("EsquemaVertical.Details")); //$NON-NLS-1$
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
 		headerBox.appendChild(titol);
-		ImageClic botoTancar = new ImageClic();
+		botoTancar = new ImageClic();
 		botoTancar.setSrc("~./img/tanca.png"); //$NON-NLS-1$
 		botoTancar.setAlign("right"); //$NON-NLS-1$
 		botoTancar.setTooltiptext(Messages.getString("EsquemaVertical.CloseDetails")); //$NON-NLS-1$
@@ -313,7 +315,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	public void showFormulari ()
 	{
 		Event ev2 = new Event("onShowFormulari", this); //$NON-NLS-1$
-		Events.sendEvent(this, ev2);
+		Events.postEvent(ev2);
 		if (!formulariHolder.isVisible())
 		{
 			llistaHolder.setSclass("record-list-shrinked");
@@ -326,7 +328,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	public void hideFormulari ()
 	{
 		Event ev2 = new Event("onHideFormulari", this); //$NON-NLS-1$
-		Events.sendEvent(this, ev2);
+		Events.postEvent(ev2);
 
 		if (formulariHolder.isVisible())
 		{
@@ -353,7 +355,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	{
 		Event ev2 = new Event("onShowCriteris", EsquemaVertical.this); //$NON-NLS-1$
 
-		Events.sendEvent(EsquemaVertical.this, ev2);
+		Events.postEvent(ev2);
 		criterisVisible = true;
 
 		mostraCriteris();
@@ -363,7 +365,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	{
 		Event ev2 = new Event("onHideCriteris", EsquemaVertical.this); //$NON-NLS-1$
 
-		Events.sendEvent(EsquemaVertical.this, ev2);
+		Events.postEvent(ev2);
 		criterisVisible = true;
 
 		manageShowCriteria();
@@ -681,5 +683,14 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 
 	public String getSclass() {
 		return super.getSclass()+" frame-vertical";
+	}
+	
+	public void removeCriteria () {
+		criterisDiv.setVisible(false);
+	}
+	
+	public void removeList () {
+		llistaHolder.setVisible(false);
+		botoTancar.setVisible(false);
 	}
 }
