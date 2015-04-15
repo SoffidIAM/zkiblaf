@@ -125,6 +125,7 @@ public class Exporter {
 		Collection items = listbox.getItems();
 		if (items!=null) for (Iterator it = items.iterator(); it.hasNext();) {
 			Listitem item = (Listitem) it.next();
+			listbox.renderItem(item);
 			StringBuffer i = new StringBuffer(""); //$NON-NLS-1$
 			Collection cells = item.getChildren();
 			boolean first = true;
@@ -197,6 +198,7 @@ public class Exporter {
 			Collection items = rows.getChildren();
 			if (items!=null) for (Iterator it = items.iterator(); it.hasNext();) {
 				DataRow item = (DataRow) it.next();
+				grid.renderRow(item);
 				List fillsFila = item.getChildren();
 				StringBuffer i = new StringBuffer(""); //$NON-NLS-1$
 				boolean first = true;
