@@ -17,8 +17,12 @@ import org.zkoss.zul.Filedownload;
  */
 public class ExportContingutMime {
 	
-	public static void export (String mime, String contingut, String filename, Component c) throws UnsupportedEncodingException {
-		Filedownload.save(new AMedia(filename, null, mime, contingut.getBytes("UTF-8")));
+	public static void export (String mime, String contingut, String filename, Component c) {
+		try {
+			Filedownload.save(new AMedia(filename, null, mime, contingut.getBytes("UTF-8")));
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
