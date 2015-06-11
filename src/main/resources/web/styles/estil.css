@@ -661,3 +661,5 @@ div.listbox-head th.sort-dsc div.head-cell-inner, div.grid-head th.sort-dsc div.
   background-position: 99% center;
   background-repeat: no-repeat;
 }
+
+.listfilter {background-color: rgb(138,179,10); width:90%; border: white solid 1px;}
