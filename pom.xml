@@ -314,6 +314,12 @@
       <classifier>api</classifier>
       <scope>provided</scope>
     </dependency>
+	<dependency>
+		<groupId>org.apache.openejb</groupId>
+		<artifactId>openejb-core</artifactId>
+		<version>4.7.4</version>
+		<scope>provided</scope>
+	</dependency>
   </dependencies>
   <reporting>
     <plugins>
