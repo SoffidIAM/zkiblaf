@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><?taglib uri="/WEB-INF/tld/web/core.dsp.tld" prefix="c" ?>
 <?page id="index"?>
-<window xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
+<window id="appWindow" xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss.org/2005/zk" height="100%"
  width="100%" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 	<zscript>
@@ -21,8 +21,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss
 		<div align="right" sclass="col_der">
 			<div sclass="benvingutmsg" unless="${arg.embed}">
 				<label sclass="benvingut" value="${c:l('zkiblaf.lblUsuario')}: "/>
-		    	<label if="${arg.showProfile}" onClick='es.caib.zkib.zkiblaf.Application.setPage("perfil/perfil.zul")' sclass="codiusuari" value="${nom} (${usuari})"/>
-				<label if="${!arg.showProfile}" sclass="codiusuari" onClick="openMenu();" value="${usuari}"/>	
+		    	<label if="${arg.showProfile}" id="fullNameLabel" onClick='es.caib.zkib.zkiblaf.Application.setPage("perfil/perfil.zul")' sclass="codiusuari" value="${nom} (${usuari})"/>
+				<label if="${!arg.showProfile}" id="userNameLabel" sclass="codiusuari" onClick="openMenu();" value="${usuari}"/>	
 				<label if="${arg.showProfile}" id="logoutButton" sclass="titol_tanca" value="${c:l('zkiblaf.tancarSessio')}"/>
 			</div>
 			<div sclass="benvingutmsg" if="${arg.embed}">
