@@ -175,28 +175,30 @@ public class ApplicationComponent extends Vbox {
 						public void onEvent(Event event) throws Exception {
 							if ("onOK".equals(event.getName())) { //$NON-NLS-1$
 								Execution ex = Executions.getCurrent();
-								Class c = Class.forName("es.caib.loginModule.util.SessionManager"); //$NON-NLS-1$
-								Object sessionManager = c.newInstance();
-								Method m = c.getMethod("endSession", //$NON-NLS-1$
-									new Class [] {
-										HttpServletRequest.class,
-										HttpServletResponse.class
-									});
 								
 								HttpServletRequest req = (HttpServletRequest) ex.getNativeRequest();
 								HttpServletResponse resp = (HttpServletResponse) ex.getNativeResponse();
 								try {
+									Class c = Class.forName("es.caib.loginModule.util.SessionManager"); //$NON-NLS-1$
+									
+									Object sessionManager = c.newInstance();
+									Method m = c.getMethod("endSession", //$NON-NLS-1$
+										new Class [] {
+											HttpServletRequest.class,
+											HttpServletResponse.class
+										});
+									
 									m.invoke(sessionManager, 
 										new Object[] {
 											req,
 											resp
 										});
+									HttpSession httpSession = req.getSession();
+									httpSession.invalidate();
 								} catch (Exception e) {
 									
 								}
 								
-								HttpSession httpSession = req.getSession();
-								httpSession.invalidate();
 								Executions.sendRedirect(
 										req.getScheme()+"://"+
 										req.getServerName()+":"+req.getServerPort()+
