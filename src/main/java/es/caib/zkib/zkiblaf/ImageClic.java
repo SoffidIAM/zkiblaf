@@ -1,5 +1,6 @@
 package es.caib.zkib.zkiblaf;
 
+import org.zkoss.xml.HTMLs;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Image;
 
@@ -9,6 +10,15 @@ public class ImageClic extends Image
 	private static final long serialVersionUID = 1L;
 
 	private boolean disabled = false;
+	private String title;
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public ImageClic ()
 	{
@@ -58,4 +68,12 @@ public class ImageClic extends Image
 		}
 		return sb != null ? sb.toString() : null;
 	}
+
+	public String getInnerAttrs() {
+		final StringBuffer sb =
+			new StringBuffer(64).append(super.getInnerAttrs());
+		HTMLs.appendAttribute(sb, "title", title);
+		return sb.toString();
+	}
+
 }
