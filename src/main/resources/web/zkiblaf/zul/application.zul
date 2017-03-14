@@ -4,6 +4,7 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss.org/2005/zk" height="100%"
  width="100%" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 	<zscript>
+	
 	String usuari = Executions.getCurrent().getUserPrincipal().getName();
 	String nom = Executions.getCurrent().getUserPrincipal().getFullName();
 	//boolean mostraFavorits = es.caib.zkib.zkiblaf.Application.isFavoritesVisible();
@@ -47,8 +48,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss
 			<label class="maintitle" id="title" value="${c:l('application.zul.BPM')}"/>
 		</div>
 	</div>
-	<div sclass="workarea">
-	<vbox id="workArea" width="98%">
+	<div sclass="workarea" style="height: 100%; width: 100%">
+	<vbox id="workArea" style="height: 100%; width: 100%">
 		<include/>
 		<include/>
 		<include/>

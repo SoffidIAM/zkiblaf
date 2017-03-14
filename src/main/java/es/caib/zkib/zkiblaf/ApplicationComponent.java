@@ -104,6 +104,16 @@ public class ApplicationComponent extends Vbox {
 	private Component workArea;
 	private Window window;
 	private Label titleLabel;
+	private String template = "~./zkiblaf/zul/application.zul";
+	
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
 	Stack stack = new Stack ();
 	
 	public Stack getStack() {
@@ -140,7 +150,7 @@ public class ApplicationComponent extends Vbox {
 		HashMap hmap = new HashMap();
 		hmap.put("showProfile", new Boolean (showProfile));
 		hmap.put("embed", new Boolean (embed));
-		window = (Window) Executions.createComponents("~./zkiblaf/zul/application.zul", this, hmap); //$NON-NLS-1$
+		window = (Window) Executions.createComponents(template, this, hmap); //$NON-NLS-1$
 		if (window != getChildren().get(0))
 			this.insertBefore(window, (Component) getChildren().get(0));
 		workArea = window.getFellow("workArea"); //$NON-NLS-1$
