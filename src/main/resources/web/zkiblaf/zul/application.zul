@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><?taglib uri="/WEB-INF/tld/web/core.dsp.tld" prefix="c" ?>
 <?page id="index"?>
 <window id="appWindow" xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss.org/2005/zk" height="100%"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss.org/2005/zk"
  width="100%" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 	<zscript>
 	
@@ -48,8 +48,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss
 			<label class="maintitle" id="title" value="${c:l('application.zul.BPM')}"/>
 		</div>
 	</div>
-	<div sclass="workarea" style="height: 100%; width: 100%">
-	<vbox id="workArea" style="height: 100%; width: 100%">
+	<div sclass="workarea" style="width: 100%">
+	<div id="workArea" style="width: 100%">
 		<include/>
 		<include/>
 		<include/>
@@ -59,6 +59,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zk="http://www.zkoss
 		<include/>
 		<include/>
 		<include/>
-	</vbox>
+	</div>
 	</div>
 </window>

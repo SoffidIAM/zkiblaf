@@ -293,7 +293,7 @@ button:hover, input[type="button"]:hover {
 
 /* Barra de botons */
 .toolbar {
-	padding: 2px; border: 1px; border-top:0.1px solid white; background: #637792; 
+	padding: 2px; border: 1px; background: #637792; 
 }
 
 .toolbar a, .toolbar a:visited, .toolbar a:hover {
@@ -663,3 +663,4 @@ div.listbox-head th.sort-dsc div.head-cell-inner, div.grid-head th.sort-dsc div.
 }
 
 .listfilter {background-color: rgb(138,179,10); width:90%; border: white solid 1px;}
+
