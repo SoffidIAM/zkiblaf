@@ -52,6 +52,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	HtmlBasedComponent criteris;
 	HtmlBasedComponent llista;
 	HtmlBasedComponent formulari;
+	boolean hideSearchToolbar;
 	Div criterisHolder;
 	Div llistaHolder;
 	Div formulariHolder;
@@ -96,12 +97,15 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 		titol.setSclass("titol_capsa"); //$NON-NLS-1$
 		criterisDiv.insertBefore(titol, null);
 
-		defineToolbarElements();
-
-		HtmlBasedComponent show_criteria_opt = new Div();
-		show_criteria_opt.setWidth("100%"); //$NON-NLS-1$
-		show_criteria_opt.appendChild(opt_toolbar);
-		criterisDiv.insertBefore(show_criteria_opt, null);
+		if (!hideSearchToolbar)
+		{
+			defineToolbarElements();
+	
+			HtmlBasedComponent show_criteria_opt = new Div();
+			show_criteria_opt.setWidth("100%"); //$NON-NLS-1$
+			show_criteria_opt.appendChild(opt_toolbar);
+			criterisDiv.insertBefore(show_criteria_opt, null);
+		}
 
 		// Part d'adalt; criteris
 		criterisHolder = new Div();
@@ -692,5 +696,13 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 	public void removeList () {
 		llistaHolder.setVisible(false);
 		botoTancar.setVisible(false);
+	}
+
+	public boolean isHideSearchToolbar() {
+		return hideSearchToolbar;
+	}
+
+	public void setHideSearchToolbar(boolean hideSearchToolbar) {
+		this.hideSearchToolbar = hideSearchToolbar;
 	}
 }
