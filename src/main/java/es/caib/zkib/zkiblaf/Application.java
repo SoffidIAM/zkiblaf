@@ -1,5 +1,6 @@
 package es.caib.zkib.zkiblaf;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
@@ -13,7 +14,12 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 
 
-public class Application {
+public class Application implements Serializable{
+	public Application() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 */
@@ -200,7 +206,8 @@ public class Application {
 
 }
 
-class FrameInfo {
+class FrameInfo implements Serializable 
+{
 	String url;
 	String title;
 	Frameable frame;

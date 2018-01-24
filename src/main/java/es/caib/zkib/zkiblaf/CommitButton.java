@@ -1,6 +1,9 @@
 package es.caib.zkib.zkiblaf;
 
+import org.zkoss.zk.au.AuScript;
+import org.zkoss.zk.au.out.AuConfirmClose;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.UiException;
 import org.zkoss.zk.ui.event.Event;
@@ -97,12 +100,27 @@ public class CommitButton extends Toolbarbutton  {
 	}
 	
 
+	private void enableExit(boolean exit)
+	{
+		if (!exit)
+			Executions.getCurrent().addAuResponse("unableExit", new AuScript(this , "zkau.confirmClose=true;"));
+		else
+			Executions.getCurrent().addAuResponse("unableExit", new AuScript(this , "zkau.confirmClose=false;"));
+	}
+	
 	protected void checkCommitPending() {
 		Component c = Path.getComponent(getSpaceOwner(), dataModel);
 		if (c != null && c instanceof DataModel)
-			setVisible ( ( (DataModel) c).isCommitPending() );
+		{
+			boolean commitPending = ( (DataModel) c).isCommitPending();
+			setVisible ( commitPending );
+			enableExit(!commitPending);
+		}
 		else
+		{
 			setVisible(false);
+			enableExit(true);
+		}
 	}
 
 

@@ -20,6 +20,7 @@ import org.zkoss.zul.Box;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbar;
@@ -356,6 +357,7 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		llistaHolder.invalidate();
 		formulariHolder.setSclass("record-form");
 		formulariHolder.setVisible(true);
+				
 	}
 
 	public void hideFormulari ()

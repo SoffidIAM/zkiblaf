@@ -1,5 +1,6 @@
 package es.caib.zkib.zkiblaf;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,6 +28,11 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
+
+import es.caib.zkib.component.DataModel;
+import es.caib.zkib.datasource.CommitException;
+import es.caib.zkib.events.SerializableEventListener;
+
 import org.zkoss.zk.ui.Path;
 
 /**
@@ -145,8 +151,40 @@ public class ApplicationComponent extends Vbox {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private void registerSaveEvent ()
+	{
+		addEventListener("onCtrlKey", new CtrlKeyEventListener());
+	}
+	
+	class CtrlKeyEventListener implements EventListener, Serializable {
+		private static final long serialVersionUID = 1L;
+
+		public void onEvent(Event event) throws Exception {
+			FrameInfo frame = Application.getActiveFrame();
+			try {
+				doCommit (frame.component);
+			} catch (CommitException e) {
+				throw new UiException (e);				
+			}
+		}
+
+		private void doCommit(Component frame) throws CommitException {
+			if (frame instanceof DataModel)
+				((DataModel) frame).commit();
+			else
+			{
+				for (Component child: (Collection<Component>)frame.getChildren())
+					doCommit(child);
+			}
+		}
+		
+	}
+	
 	public void onCreate () {
 		Application.registerApplication (this);
+		
+		setCtrlKeys("^S@S");
+		registerSaveEvent();
 		HashMap hmap = new HashMap();
 		hmap.put("showProfile", new Boolean (showProfile));
 		hmap.put("embed", new Boolean (embed));
@@ -175,7 +213,7 @@ public class ApplicationComponent extends Vbox {
 				button = window.getFellowIfAny("otherlogoutButton");
 		}
 		if (button != null)
-			button.addEventListener("onClick", new EventListener() { //$NON-NLS-1$
+			button.addEventListener("onClick", new SerializableEventListener() { //$NON-NLS-1$
 			public void onEvent(Event event) throws Exception {
 				Missatgebox.confirmaOK_CANCEL(
 					Labels.getLabel("zkiblaf.tancarSessioConfirm"), //$NON-NLS-1$
@@ -209,10 +247,7 @@ public class ApplicationComponent extends Vbox {
 									
 								}
 								
-								Executions.sendRedirect(
-										req.getScheme()+"://"+
-										req.getServerName()+":"+req.getServerPort()+
-										logoutPage);
+								Executions.sendRedirect(logoutPage);
 							}
 						}
 						
