@@ -25,7 +25,7 @@ public class Application implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static FrameInfo activeFrame = null;
+	private FrameInfo activeFrame = null;
 
 	public static void registerPage(Component f) {
 		Stack s = getStack();
@@ -112,8 +112,8 @@ public class Application implements Serializable{
 		app.newFrame(page);
 		// Guardem la pàgina actual en la sessió
 		// només si és actiu el modo autoReload a l'aplicació
-		if (getApplication()!=null && getApplication().isAutoReload()) {
-			Session zksessio = getApplication().getDesktop().getSession();
+		if (app!=null && app.isAutoReload()) {
+			Session zksessio = app.getDesktop().getSession();
 			if (zksessio != null) {
 				// el guardem per al possible reload (F5)
 				zksessio.setAttribute("paginaActual", page); //$NON-NLS-1$
@@ -121,7 +121,8 @@ public class Application implements Serializable{
 		}
 
 		// Guardamos el Frameinfo actual como estático de la clase
-		activeFrame = fi;
+		if (app != null)
+			app.activeFrame = fi;
 	}
 
 	public static void setTitle(String title) {
@@ -200,7 +201,11 @@ public class Application implements Serializable{
 	}
 
 	public static FrameInfo getActiveFrame() {
-		return activeFrame;
+		ApplicationComponent app = getApplication();
+		if (app == null)
+			return null;
+		else
+			return app.activeFrame;
 	}
 	
 
