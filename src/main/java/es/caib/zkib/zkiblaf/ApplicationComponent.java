@@ -46,6 +46,8 @@ public class ApplicationComponent extends Vbox {
 	String menu;
 	String favorits; //ruta del menu favorits
 	boolean embed = false;
+	FrameInfo activeFrame;
+	
 	public boolean isEmbed() {
 		return embed;
 	}
@@ -162,7 +164,8 @@ public class ApplicationComponent extends Vbox {
 		public void onEvent(Event event) throws Exception {
 			FrameInfo frame = Application.getActiveFrame();
 			try {
-				doCommit (frame.component);
+				if (frame != null && frame.component != null)
+					doCommit (frame.component);
 			} catch (CommitException e) {
 				throw new UiException (e);				
 			}
