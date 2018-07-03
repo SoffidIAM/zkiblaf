@@ -47,6 +47,7 @@ public class ApplicationComponent extends Vbox {
 	String favorits; //ruta del menu favorits
 	boolean embed = false;
 	FrameInfo activeFrame;
+	boolean embeddedMenu = false;
 	
 	public boolean isEmbed() {
 		return embed;
@@ -269,10 +270,23 @@ public class ApplicationComponent extends Vbox {
 						throw new UiException(es.caib.zkib.zkiblaf.Messages.getString("ApplicationComponent.MenuItemSelectedError")); //$NON-NLS-1$
 					}
 					Window menu = (Window) Path.getComponent(ApplicationComponent.this.getSpaceOwner(), getMenu());
-					menu.setTop("29px"); //$NON-NLS-1$
-					menu.setLeft("5px"); //$NON-NLS-1$
-					if(!menu.isVisible())
-						menu.doPopup();
+					if (embeddedMenu)
+					{
+						if(!menu.isVisible())
+							menu.doEmbedded();
+						else
+							menu.setVisible(false);
+					}
+					else
+					{
+						menu.setTop("29px"); //$NON-NLS-1$
+						menu.setLeft("5px"); //$NON-NLS-1$
+						String pos = menu.getPosition();
+						if(!menu.isVisible())
+						{
+							menu.doPopup();
+						}
+					}
 				}
 			});
 		}
@@ -390,6 +404,14 @@ public class ApplicationComponent extends Vbox {
 
 	public void setMainWindowTitle(String mainWindowTitle) {
 		this.mainWindowTitle = mainWindowTitle;
+	}
+
+	public boolean isEmbeddedMenu() {
+		return embeddedMenu;
+	}
+
+	public void setEmbeddedMenu(boolean embeddedMenu) {
+		this.embeddedMenu = embeddedMenu;
 	}
 
 }
