@@ -7,6 +7,7 @@ import java.util.List;
 import org.zkoss.zk.ui.AbstractComponent;
 import org.zkoss.zk.ui.HtmlBasedComponent;
 import org.zkoss.zk.ui.HtmlMacroComponent;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Column;
 import org.zkoss.zul.Columns;
 import org.zkoss.zul.Datebox;
@@ -74,6 +75,16 @@ public class Exporter {
 			// Datebox
 			Textbox tb = (Textbox) fill;
 			s.append(tb.getText().replaceAll("\"", "\'")); //$NON-NLS-1$
+		} else if (fill instanceof Checkbox) {
+			// Datebox
+			Checkbox cb = (Checkbox) fill;
+			if (cb.isChecked())
+			{
+				if (cb.getLabel() != null)
+					s.append(cb.getLabel().replaceAll("\"", "\'")); //$NON-NLS-1$
+				else
+					s.append("true");
+			}
 		} else if (fill instanceof Div || fill instanceof HtmlMacroComponent) {
 			HtmlBasedComponent div = (HtmlBasedComponent) fill;
 			// Hem de mirar els fills
