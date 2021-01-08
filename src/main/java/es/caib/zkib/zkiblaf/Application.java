@@ -60,7 +60,12 @@ public class Application implements Serializable{
 				if (fi.frame != null)
 				{
 					if (fi.component!=null) Events.sendEvent(new Event ("onPrepareClose", fi.component)); //$NON-NLS-1$
-					if (!fi.frame.canClose())
+					if (!fi.frame.canClose(
+						(event) -> {
+							s.pop();
+							app.deleteLastFrame();
+							activatePage(page);
+						}))
 						return ;
 				}
 				// Comprobem que els components frameable de la frame actual es poden tancar
@@ -84,8 +89,13 @@ public class Application implements Serializable{
 				if (fi.frame != null)
 				{
 					Events.sendEvent(new Event ("onPrepareClose", fi.component)); //$NON-NLS-1$
-					if (!fi.frame.canClose())
-						return ;
+					if (!fi.frame.canClose(
+							(event) -> {
+								s.pop();
+								app.deleteLastFrame();
+								activatePage(page);
+							}))
+							return ;
 				}
 				s.pop();
 				app.deleteLastFrame();
@@ -167,31 +177,42 @@ public class Application implements Serializable{
 		Stack s = getStack();
 		if (s.size() > 1)
 		{
+			ApplicationComponent app = getApplication();
 			FrameInfo fi = (FrameInfo) s.peek();
 			if (fi != null && fi.frame != null)
 			{
 				Events.sendEvent(new Event ("onPrepareClose", fi.component)); //$NON-NLS-1$
-				if (!fi.frame.canClose())
-					return ;
+				if (!fi.frame.canClose(
+						(event) -> {
+							doBack(s, app);
+						}))
+						return ;
 			}
-			s.pop();
-			ApplicationComponent app = getApplication();
-			app.deleteLastFrame();
-			fi = (FrameInfo) s.peek();
-			if (fi.component!=null) 
-				fi.component.setVisible(true);
-			if (fi.frame != null)
-				setTitle(fi.frame.getTitle());
-			if (fi.component!=null) 
-				Events.sendEvent(new Event ("onReturn", fi.component)); //$NON-NLS-1$
+			doBack(s, app);
 		}else if(s.size()==1){
-			//com que no tenim historial, tornem a la pagina principal de l'aplicacio
 			if(Application.getApplication().getInitialPage()!=null)
 			{
 				Application.jumpTo(Application.getApplication().getInitialPage());
 				Events.postEvent("onExit", getApplication(), null);
 			}
 		}
+	}
+
+	public static void doBack(Stack s, ApplicationComponent app) {
+		FrameInfo fi;
+		s.pop();
+		app.deleteLastFrame();
+		fi = (FrameInfo) s.peek();
+		if (fi.component!=null) 
+			fi.component.setVisible(true);
+		else if (fi.url != null) {
+			app.deleteLastFrame();
+			app.newFrame(fi.url);
+		}
+		if (fi.frame != null)
+			setTitle(fi.frame.getTitle());
+		if (fi.component!=null) 
+			Events.sendEvent(new Event ("onReturn", fi.component)); //$NON-NLS-1$
 	}
 
 	public static void registerApplication(
@@ -226,7 +247,7 @@ class FrameInfo implements Serializable
 	public boolean checkCanClose() {
 		// Cridem al mètode canclose dels components que implementen frameable
 		for (Iterator it = framesCanClose.iterator(); it.hasNext();) {
-			if (!((Frameable) it.next()).canClose()) return false;
+			if (!((Frameable) it.next()).canClose(null)) return false;
 		}
 		return true;
 	}
