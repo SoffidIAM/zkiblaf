@@ -17,7 +17,6 @@ import org.zkoss.zk.ui.event.Events;
 public class Application implements Serializable{
 	public Application() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
