@@ -200,15 +200,21 @@ public class Application implements Serializable{
 		ex.getDesktop().setAttribute("zkiblaf$application", applicationComponent); //$NON-NLS-1$
 	}
 
-	public static FrameInfo getActiveFrame() {
+	public static FrameInfo getActiveFrameInfo() {
 		ApplicationComponent app = getApplication();
 		if (app == null)
 			return null;
 		else
 			return app.activeFrame;
 	}
-	
 
+	public static Frameable getActiveFrame() {
+		ApplicationComponent app = getApplication();
+		if (app == null || app.activeFrame == null)
+			return null;
+		else
+			return app.activeFrame.frame;
+	}
 }
 
 class FrameInfo implements Serializable 
