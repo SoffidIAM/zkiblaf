@@ -1,15 +1,10 @@
 package es.caib.zkib.zkiblaf;
 
 import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Stack;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
@@ -19,9 +14,10 @@ import org.zkoss.zk.ui.Path;
 import org.zkoss.zk.ui.UiException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.ext.AfterCompose;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import es.caib.zkib.component.DataModel;
@@ -32,7 +28,7 @@ import es.caib.zkib.events.SerializableEventListener;
  * @author u88683
  *
  */
-public class ApplicationComponent extends Vbox {
+public class ApplicationComponent extends Div implements AfterCompose {
 	String initialPage;
 	String logoutPage;
 	String name;
@@ -177,7 +173,7 @@ public class ApplicationComponent extends Vbox {
 		
 	}
 	
-	public void onCreate () {
+	public void afterCompose () {
 		Application.registerApplication (this);
 		
 		setCtrlKeys("^S@S");
@@ -220,30 +216,6 @@ public class ApplicationComponent extends Vbox {
 						public void onEvent(Event event) throws Exception {
 							if ("onOK".equals(event.getName())) { //$NON-NLS-1$
 								Execution ex = Executions.getCurrent();
-								
-								HttpServletRequest req = (HttpServletRequest) ex.getNativeRequest();
-								HttpServletResponse resp = (HttpServletResponse) ex.getNativeResponse();
-								try {
-									Class c = Class.forName("es.caib.loginModule.util.SessionManager"); //$NON-NLS-1$
-									
-									Object sessionManager = c.newInstance();
-									Method m = c.getMethod("endSession", //$NON-NLS-1$
-										new Class [] {
-											HttpServletRequest.class,
-											HttpServletResponse.class
-										});
-									
-									m.invoke(sessionManager, 
-										new Object[] {
-											req,
-											resp
-										});
-									HttpSession httpSession = req.getSession();
-									httpSession.invalidate();
-								} catch (Exception e) {
-									
-								}
-								
 								Executions.sendRedirect(logoutPage);
 							}
 						}

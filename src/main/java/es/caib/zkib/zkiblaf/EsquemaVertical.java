@@ -519,7 +519,7 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 
 	public boolean canClose = true;
 
-	public boolean canClose ()
+	public boolean canClose (EventListener action)
 	{
 		boolean result = false;
 
@@ -527,11 +527,24 @@ public class EsquemaVertical extends Window implements AfterCompose, Frameable
 		{
 			try
 			{
-				result = Missatgebox.confirmaYES_NO(Labels.getLabel("task.msgDeseaSalir"), //$NON-NLS-1$
-						Labels.getLabel("task.titleDeseaSalir") //$NON-NLS-1$
-						, Messagebox.QUESTION);
-
-				return result;
+				Missatgebox.confirmaYES_NO(Labels.getLabel("task.msgDeseaSalir"), //$NON-NLS-1$
+						Labels.getLabel("task.titleDeseaSalir"), //$NON-NLS-1$
+						(event2) -> {
+							if (event2.equals("onYes"))
+							{
+								Component c = getModelDades();// Path.getComponent(getSpaceOwner(), dataModel);
+								if (c != null && c instanceof DataModel)
+								{
+									DataModel dm  =(DataModel) c;
+									dm.refresh();
+								}
+								if (action != null)	
+									action.onEvent(new Event("onClose", this));
+							}
+							
+						},
+						Messagebox.QUESTION);
+				return false;
 			}
 
 			catch (Exception ex)

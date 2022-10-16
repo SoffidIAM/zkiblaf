@@ -155,7 +155,7 @@
 	</component>
 	
 	<component>
-		<extends>vbox</extends>
+		<extends>div</extends>
 		<component-name>application</component-name>
 		<component-class>es.caib.zkib.zkiblaf.ApplicationComponent</component-class>
 	</component>

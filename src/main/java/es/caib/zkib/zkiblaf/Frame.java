@@ -1,10 +1,10 @@
 package es.caib.zkib.zkiblaf;
 
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.ext.AfterCompose;
 import org.zkoss.zul.Vbox;
 
-public class Frame extends Vbox implements Frameable {
+public class Frame extends Vbox implements Frameable, AfterCompose {
 
 	/**
 	 * 
@@ -17,13 +17,8 @@ public class Frame extends Vbox implements Frameable {
 	public Frame ()
 	{
 		setSclass("outer-frame");
-		addEventListener("onCreate", new EventListener() { //$NON-NLS-1$
-			public void onEvent(Event event) throws Exception {
-				Application.registerPage(Frame.this);
-			}
-		});
 	}
-	public boolean canClose() {
+	public boolean canClose(EventListener action) {
 		return canClose;
 	}
 	public void setCanClose(boolean canClose) {
@@ -40,6 +35,10 @@ public class Frame extends Vbox implements Frameable {
 	}
 	public void setSaveContent(boolean saveContent) {
 		this.saveContent = saveContent;
+	}
+
+	public void afterCompose() {
+		Application.registerPage(Frame.this);
 	}
 	
 	

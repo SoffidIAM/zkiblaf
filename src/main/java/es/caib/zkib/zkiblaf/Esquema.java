@@ -70,27 +70,32 @@ public class Esquema extends Window implements AfterCompose, Frameable
 	public boolean canClose = true;
 	private ImageClic botoTancar;
 
-	public boolean canClose ()
+	public boolean canClose (EventListener action)
 	{
 		boolean result = false;
 		if (isCommitPending())
 		{
 			try
 			{
-				result = Missatgebox.confirmaYES_NO(Labels.getLabel("task.msgDeseaSalir"), //$NON-NLS-1$
+				Missatgebox.confirmaYES_NO(Labels.getLabel("task.msgDeseaSalir"), //$NON-NLS-1$
 						Labels.getLabel("task.titleDeseaSalir"), //$NON-NLS-1$
+						(event2) -> {
+							if (event2.equals("onYes"))
+							{
+								Component c = getModelDades();// Path.getComponent(getSpaceOwner(), dataModel);
+								if (c != null && c instanceof DataModel)
+								{
+									DataModel dm  =(DataModel) c;
+									dm.refresh();
+								}
+								if (action != null)	
+									action.onEvent(new Event("onClose", this));
+							}
+							
+						},
 						Messagebox.QUESTION);
+				return false;
 
-				if (result)
-				{
-					Component c = getModelDades();// Path.getComponent(getSpaceOwner(), dataModel);
-					if (c != null && c instanceof DataModel)
-					{
-						DataModel dm  =(DataModel) c;
-						dm.refresh();
-					}
-				}
-				return result;
 			}
 			catch (Exception ex)
 			{

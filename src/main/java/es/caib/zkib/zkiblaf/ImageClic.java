@@ -6,7 +6,6 @@ import org.zkoss.zul.Image;
 
 public class ImageClic extends Image
 {
-
 	private static final long serialVersionUID = 1L;
 
 	private boolean disabled = false;

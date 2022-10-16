@@ -213,31 +213,12 @@ public class Missatgebox extends Window {
 	}
 	
 	/**
-	 * Mostra una finestra de confirmació OK-CANCEL amb el missatge indicat
-	 * @param missatge
-	 */
-	public static final boolean confirmaOK_CANCEL(String missatge) {
-		MissatgeboxDlg dlg=showModal(missatge, null, OK|CANCEL, QUESTION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);
-	}
-	
-	/**
 	 * Mostra una finestra de confirmació OK-CANCEL amb el missatge i el titol indicats
 	 * @param missatge
 	 * @param titol
 	 */
 	public static final MissatgeboxDlg confirmaOK_CANCEL(String missatge, String titol, EventListener events) {
 	   return show(missatge, titol, OK|CANCEL, QUESTION, 0, events);
-	}
-	
-	/**
-	 * Mostra una finestra de confirmació OK-CANCEL amb el missatge i el titol indicats
-	 * @param missatge
-	 * @param titol
-	 */
-	public static final boolean confirmaOK_CANCEL(String missatge, String titol) {
-		MissatgeboxDlg dlg=showModal(missatge, titol, OK|CANCEL, QUESTION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);
 	}
 	
 	/**
@@ -266,16 +247,6 @@ public class Missatgebox extends Window {
 	}
 	
 	/**
-	 * Mostra una finestra de confirmació YES-NO amb el missatge indicat
-	 * @param missatge
-	 */
-	public static final boolean confirmaYES_NO(String missatge){
-		MissatgeboxDlg dlg=showModal(missatge, null, YES|NO, QUESTION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);
-		
-	}		
-	
-	/**
 	 * Mostra una finestra de confirmació YES-NO amb el missatge, el titol i el tipus d'icona indicats
 	 * @param missatge
 	 * @param titol
@@ -286,31 +257,12 @@ public class Missatgebox extends Window {
 	
 	
 	/**
-	 * Mostra una finestra de confirmació YES-NO amb el missatge, el titol i el tipus d'icona indicats
-	 * @param missatge
-	 * @param titol
-	 */
-	public static final boolean confirmaYES_NO(String missatge, String titol) {
-		MissatgeboxDlg dlg=showModal(missatge, titol, YES|NO, QUESTION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);	   
-	}	
-	
-	/**
 	 * Mostra una finestra de confirmació YES-NO amb el missatge i el tipus d'icona indicats
 	 * @param missatge
 	 */
 	public static final MissatgeboxDlg confirmaYES_NO(String missatge, EventListener events, String tipoIcono) {
 		return show(missatge, null, YES|NO, tipoIcono, 0, events);
 	}
-	
-	/**
-	 * Mostra una finestra de confirmació YES-NO amb el missatge i el tipus d'icona indicats
-	 * @param missatge
-	 */
-	public static final boolean confirmaYES_NO(String missatge, String titol, String tipoIcono) {
-		MissatgeboxDlg dlg=showModal(missatge, titol, YES|NO, tipoIcono, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);	   
-	}	
 	
 	/**
 	 * Mostra una finestra de confirmació YES-NO amb el missatge i el titol indicats
@@ -320,16 +272,6 @@ public class Missatgebox extends Window {
 	public static final MissatgeboxDlg confirmaYES_NO(String missatge, String titol, EventListener events, String tipoIcono) {
 	   return show(missatge, titol, YES|NO, tipoIcono, 0, events);
 	}	
-	
-	/**
-	 * Mostra una finestra de confirmació YES-NO amb el missatge i el titol indicats
-	 * @param missatge
-	 * @param titol
-	 */
-	public static final boolean confirmaOK_CANCEL(String missatge, String titol, String tipoIcono) {
-		MissatgeboxDlg dlg=showModal(missatge, titol, OK|CANCEL, tipoIcono, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);		
-	}
 	
 	/**
 	 * Mostra una finestra de missatge sense botons
@@ -389,9 +331,8 @@ public class Missatgebox extends Window {
 	 * @param missatge
  
 	 */
-	public static final boolean confirmaOK(String missatge) {
-		MissatgeboxDlg dlg=showModal(missatge, null, OK, INFORMATION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);
+	public static final void confirmaOK(String missatge, EventListener lsnr) {
+		show(missatge, null, OK, INFORMATION, 0, lsnr, null);
 	}	
 	
 	/**
@@ -399,9 +340,8 @@ public class Missatgebox extends Window {
 	 * @param missatge
 	 * @param titol
 	 */
-	public static final boolean confirmaOK(String missatge, String titol) {
-		MissatgeboxDlg dlg=showModal(missatge, titol, OK, INFORMATION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);
+	public static final void confirmaOK(String missatge, String titol, EventListener lsnr) {
+		show(missatge, titol, OK, INFORMATION, 0, lsnr, null);
 	}	
 	
 	
@@ -410,9 +350,8 @@ public class Missatgebox extends Window {
 	 * @param missatge
  
 	 */
-	public static final boolean confirmaYES(String missatge) {
-		MissatgeboxDlg dlg=showModal(missatge, null, YES, INFORMATION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);
+	public static final void confirmaYES(String missatge, EventListener lsnr) {
+		show(missatge, null, YES, INFORMATION, 0, lsnr, null);
 	}	
 	
 	/**
@@ -420,9 +359,8 @@ public class Missatgebox extends Window {
 	 * @param missatge
 	 * @param titol
 	 */
-	public static final boolean confirmaYES(String missatge, String titol) {
-		MissatgeboxDlg dlg=showModal(missatge, titol, YES, INFORMATION, 0,null);
-		return (dlg.getResult()==MissatgeboxDlg.OK || dlg.getResult()==MissatgeboxDlg.YES);
+	public static final void confirmaYES(String missatge, String titol, EventListener lsnr) {
+		show(missatge, titol, YES, INFORMATION, 0, lsnr, null);
 	}	
 	
 	
@@ -437,7 +375,7 @@ public class Missatgebox extends Window {
 		if (params == null) 
 		/*final Map */params = new HashMap();
 		params.put("message", message); //$NON-NLS-1$
-		params.put("title", title != null ? title : Executions.getCurrent().getDesktop().getWebApp().getAppName()); //$NON-NLS-1$
+		params.put("title", title != null ? title : null); //$NON-NLS-1$
 		params.put("icon", icon); //$NON-NLS-1$
 		if (buttons != SENSE_BOTONS) {
 			params.put("buttons", new Integer((buttons & (OK | CANCEL | YES //$NON-NLS-1$
@@ -471,50 +409,6 @@ public class Missatgebox extends Window {
 		return dlg;
 	}	
 
-	private static final MissatgeboxDlg showModal(String message, String title,
-			int buttons, String icon, int focus, EventListener listener)
-	{
-		final Map params = new HashMap();
-		params.put("message", message); //$NON-NLS-1$
-		params.put("title", title != null ? title : Executions.getCurrent().getDesktop().getWebApp().getAppName()); //$NON-NLS-1$
-		params.put("icon", icon); //$NON-NLS-1$
-		if (buttons != SENSE_BOTONS) {
-			params.put("buttons", new Integer((buttons & //$NON-NLS-1$
-					(OK | CANCEL | YES | NO | ABORT | RETRY | IGNORE)) != 0 ? buttons : OK));
-			if ((buttons & OK) != 0)
-				params.put("OK", new Integer(OK)); //$NON-NLS-1$
-			if ((buttons & CANCEL) != 0)
-				params.put("CANCEL", new Integer(CANCEL)); //$NON-NLS-1$
-			if ((buttons & YES) != 0)
-				params.put("YES", new Integer(YES)); //$NON-NLS-1$
-			if ((buttons & NO) != 0)
-				params.put("NO", new Integer(NO)); //$NON-NLS-1$
-			if ((buttons & RETRY) != 0)
-				params.put("RETRY", new Integer(RETRY)); //$NON-NLS-1$
-			if ((buttons & ABORT) != 0)
-				params.put("ABORT", new Integer(ABORT)); //$NON-NLS-1$
-			if ((buttons & IGNORE) != 0)
-				params.put("IGNORE", new Integer(IGNORE)); //$NON-NLS-1$
-		} else {
-			params.put("SENSE_BUTONS", new Boolean(true)); //$NON-NLS-1$
-		}
-
-		final MissatgeboxDlg dlg = (MissatgeboxDlg) Executions.createComponents(
-				_templ, null, params);
-		dlg.setButtons(buttons);
-		dlg.setEventListener(listener);
-		if (focus > 0)
-			dlg.setFocus(focus);
-
-		try {
-			dlg.doModal();
-		} catch (InterruptedException ex) {
-			dlg.detach();
-		}
-		
-		return dlg;
-	}
-	
 	
 	/** Sets the template used to create the message dialog.
 	 *
