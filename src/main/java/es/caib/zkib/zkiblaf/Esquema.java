@@ -406,9 +406,9 @@ public class Esquema extends Window implements AfterCompose, Frameable
 		}
 
 		// Ens establim com a component frameable (canclose)
-		if (Application.getActiveFrame() != null)
+		if (Application.getActiveFrameInfo() != null)
 		{
-			Application.getActiveFrame().addFrameCheckCanClose(this);
+			Application.getActiveFrameInfo().addFrameCheckCanClose(this);
 		}
 
 	}

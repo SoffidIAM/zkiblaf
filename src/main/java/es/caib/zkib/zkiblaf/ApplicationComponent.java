@@ -152,7 +152,7 @@ public class ApplicationComponent extends Div implements AfterCompose {
 		private static final long serialVersionUID = 1L;
 
 		public void onEvent(Event event) throws Exception {
-			FrameInfo frame = Application.getActiveFrame();
+			FrameInfo frame = Application.getActiveFrameInfo();
 			try {
 				if (frame != null && frame.component != null)
 					doCommit (frame.component);
